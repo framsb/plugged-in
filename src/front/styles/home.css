@@ -1,7 +1,80 @@
-/*
-    home.css: This website contains selectors only used in home.css
+body {
+    background-color: #151E3D;
+}
 
-    All pages share the styles on index.css but you should create 
-    one more css for each page that will contain the selected used 
-    on that page only (the ones not reused in other pages).
-*/
+.home {
+    display: flex;
+    margin: 15px;
+    padding-bottom: 50px;
+    border-bottom: solid #8276a8;
+}
+.carousel {
+    min-width: 48%;
+    min-height: 600px;
+    border: solid #0f0a1f;
+    border-radius: 15px;
+}
+.carousel-inner img {
+    min-width: 250px;
+    max-height: 400px;
+    justify-content: center;
+    border-radius: 15px;
+}
+.registro-home {
+    min-width: 50%;
+    color: white;
+    border: solid #0f0a1f;
+    border-radius: 15px;
+    margin: 0px 15px;
+    font-size: 30px;
+}
+.sobre-nosotros {
+    color: white;
+    margin: 15px;
+}
+/* clases con sn al principio: sobre nosotros abreviado */
+.sn-persona1 {
+    display: flex;
+    padding: 30px 0px;
+}
+.sn-persona2 {
+    padding: 30px 0px;
+}
+/* img Alfonso */
+.sn-img1 {
+    width: 300px;
+    height: 200px;
+    border: solid #0f0a1f;
+    border-radius: 15px;
+    justify-content: left;
+}
+/* img Framberling */
+.sn-img2 {
+    width: 300px;
+    height: 200px;
+    border: solid #0f0a1f;
+    border-radius: 15px;
+    float: right;
+}
+/* titulo Sobre Nosotros... */
+.sn-titulo {
+    text-align: center;
+    font-size: 35px;
+    background-color: #0f0a1f;
+    border-radius: 15px;
+}
+/* texto Alfonso */
+.sn-texto {
+    font-size: 20px;
+    padding: 15px;
+}
+/* texto Framberling */
+.sn-texto2 {
+    font-size: 20px;
+    padding: 15px;
+    float: right;
+}
+/* descripciones sobre nosotros */
+/* .sn-cuerpo {
+    
+} */
