@@ -12,6 +12,12 @@ class User(db.Model):
     imagen = db.Column(db.String(250))
     fecha_registro = db.Column(db.Date, nullable=False)
 
+    def __init__(self,name,email,password):
+        self.username = username
+        self.email = email
+        self.password = password
+        self.is_active = True
+    
     def __repr__(self):
         return f'<User {self.email}>'
 
@@ -19,6 +25,7 @@ class User(db.Model):
         return {
             "id": self.id,
             "email": self.email,
+            "username": self.username
             # do not serialize the password, its a security breach
         }
 
@@ -49,8 +56,9 @@ class Amigos(db.Model):
 class Comment(db.Model):
     __tablename__ = 'comment'
     id = db.Column(db.Integer, primary_key=True)
-    author_id = db.Column(db.String, ForeignKey("user.id"))
+    author_id = db.Column(db.String, db.ForeignKey("user.id"))
+    created = db.Column(db.Date, nullable=False) #fecha de creacion
     #post_id =
     comment_content = db.Column(db.String(140))
-    # post = relationship
-    user = relationship("User")
+    # post = db.relationship
+    user = db.relationship("User")

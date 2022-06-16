@@ -1,16 +1,17 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import "../../styles/index.css";
 
 export const Navbar = () => {
 	return (
-		<nav className="navbar navbar-light bg-light">
+		<nav className="navbar">
 			<div className="container">
 				<Link to="/">
-					<span className="navbar-brand mb-0 h1">Plugged-in</span>
+					<span className="navbar navbar-logo mb-0">Plugged-in</span>
 				</Link>
 				<div className="ml-auto">
-					<Link to="/demo">
-						<button className="btn btn-primary">Check the Context in action</button>
+					<Link to="/registrarse">
+						<button className="btn btn-primary">Register</button>
 					</Link>
 				</div>
 			</div>

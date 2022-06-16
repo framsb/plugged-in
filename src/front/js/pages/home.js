@@ -12,7 +12,7 @@ export const Home = () => {
     {/* div con clase Home: incluye carousel y las formas de registro */}
       <div
         id="carouselExampleCaptions"
-        class="carousel slide carousel-fade"
+        class="carousel slide"
         data-bs-ride="false"
       >
       {/* Carousel */}

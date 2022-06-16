@@ -1,3 +1,4 @@
-/* 
-    General Styles used on every website (Don't Repeat Yourself)
-*/
+.navbar {
+    background-color: #1d2a57;
+    color: white;
+}
