@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { Context } from "../store/appContext";
+import { Link } from "react-router-dom";
 import rigoImageUrl from "../../img/rigo-baby.jpg";
 import "../../styles/home.css";
 
@@ -89,7 +90,7 @@ export const Home = () => {
 	    <div className="registro-home text-center">
       {/* Div del lado derecho con opciones de registrarte e iniciar sesion */}
 		<p>Regístrate ahora!</p>
-    <button>Registrarse</button>
+    <Link to="/registrarse" className="btn btn-dark">Register</Link>
 		<p>Si ya tienes cuenta... Inicia sesión aquí!</p>
     <button>Iniciar Sesion</button>
 	    </div>
