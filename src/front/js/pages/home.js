@@ -92,7 +92,7 @@ export const Home = () => {
 		<p>Regístrate ahora!</p>
     <Link to="/registrarse" className="btn btn-dark">Register</Link>
 		<p>Si ya tienes cuenta... Inicia sesión aquí!</p>
-    <button>Iniciar Sesion</button>
+    <Link to="/login" className="btn btn-dark">Log In</Link>
 	    </div>
     </div>
     <div className="sobre-nosotros">

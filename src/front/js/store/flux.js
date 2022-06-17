@@ -17,12 +17,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 			regiones: []
 		},
 		actions: {
-			loadRegions: async () => {
-				const url = "https://restcountries.com/v2/all";
-				let response = await fetch(url);
-				const data = await response.json();
-				setStore({ regiones: data.results });
-			},
+			// loadRegions: async () => {
+			// 	const url = "https://restcountries.com/v2/all";
+			// 	let response = await fetch(url);
+			// 	const data = await response.json();
+			// 	setStore({ regiones: data.results });
+			// },
 
 			getMessage: () => {
 				// fetching data from the backend

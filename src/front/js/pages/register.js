@@ -8,14 +8,19 @@ export const Register = () => {
   const [register, setRegister] = useState({
     username: "",
     password: "",
-    confirmpassword: "",
+    confirmPassword: "",
     email: "",
     date: ""
   });
 
+  const [showPassword, setShowPassword] = useState(false);
+
+// const [errors, setErrors] = useState({}) -> regex y condiciones para el submit
+
   let usernamergx = /^[a-zA-Z0-9](_(?!(\.|_))|\.(?!(_|\.))|[a-zA-Z0-9]){6,18}[a-zA-Z0-9]$/;
   let emailrgx = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
   let usernameregex = /^(?=[a-zA-Z0-9]{8,20}$)$/;
+  let passwordregex = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/; // 
 
   const datosRegistro = (e) => {
     setRegister({
@@ -33,14 +38,14 @@ export const Register = () => {
             <div className="col-lg-10 col-xl-10">
               <div className="card rounded-3">
                 <div className="card-body p-4 p-md-5">
-                  <h3 className="mb-4 pb-2 pb-md-0 mb-md-5 px-md-2 text-center">
-                    Registration Info
+                  <h3 className="mb-4 pb-2 pb-md-0 mb-md-5 px-md-2 text-left">
+                    Información de Registro
                   </h3>
 
                   <form className="px-md-2">
                     <div className="col-lg-8 mb-4">
                       <div className="row">
-                        <div className="col-md-6 form-outline mb-4">
+                        <div className="col-9 form-outline mb-4">
                           <label
                             className="form-label"
                             htmlFor="form3Example1q"
@@ -56,7 +61,7 @@ export const Register = () => {
                             className="form-control"
                           />
                         </div>
-                        <div className="col-md-6 form-outline mb-4">
+                        <div className="col-9 form-outline mb-4">
                           <label
                             className="form-label"
                             htmlFor="form3Example2q"
@@ -74,36 +79,64 @@ export const Register = () => {
                         </div>
                       </div>
                       <div className="row">
-                        <div className="col-md-6 form-outline mb-4">
+                        <div className="col-md-9 form-outline mb-4">
                           <label
                             className="form-label"
                             htmlFor="form3Example3q"
                           >
                             Contraseña
                           </label>
+                          <div className="input-btn">
                           <input
                             name="password"
-                            type="password"
+                            type={showPassword ? "text" : "password"}
                             id="form3Example3q"
                             className="form-control"
                             value={register.password}
                             onChange={datosRegistro}
                           />
+                          <button
+                          className={
+                            showPassword
+                              ? "fa fa-eye-slash btn btn-password btn-outline-dark"
+                              : "fa fa-eye password-icon btn btn-outline-dark"
+                          }
+                          onClick={(e) => {
+                            e.preventDefault();
+                            setShowPassword(!showPassword);
+                          }}
+                          ></button>
+                          </div>
                         </div>
-                        <div className="col-md-6 form-outline mb-4">
+                        <div className="col-md-9 form-outline mb-4">
                           <label
                             className="form-label"
                             htmlFor="form3Example4q"
                           >
                             Repetir Contraseña
                           </label>
+                          <div className="input-btn">
+
                           <input
-                            type="password"
+                            name="confirmPassword"
+                            type={showPassword ? "text" : "password"}
                             id="form3Example4q"
                             className="form-control"
-                            value={register.confirmpassword}
+                            value={register.confirmPassword}
                             onChange={datosRegistro}
-                          />
+                            />
+                          <button
+                          className={
+                            showPassword
+                            ? "fa fa-eye-slash btn btn-password btn-outline-dark"
+                            : "fa fa-eye password-icon btn btn-outline-dark"
+                          }
+                          onClick={(e) => {
+                            e.preventDefault();
+                            setShowPassword(!showPassword);
+                          }}
+                          ></button>
+                          </div>
                         </div>
                       </div>
                       <div className="col-md-6 mb-4">
@@ -123,20 +156,36 @@ export const Register = () => {
                           />
                         </div>
                       </div>
-                      <div className="col-md-6 mb-4">
-                        <select className="select">
-                          <option value="1" disabled>
-                            Region (falta api)
-                          </option>
-                          <option value="2">Vzla</option>
-                          <option value="3">USA</option>
-                          <option value="4">España</option>
-                        </select>
+                      <div>
+                        <label
+                          htmlFor="regionPicker"
+                          className="form-label"
+                          onChange={datosRegistro}
+                          >
+                            Escoge tu region!
+                        </label>
+                        <div className="col-md-8 mb-4">
+                          <select className="select" id="regionPicker">
+                            <option value="1" disabled>
+                              Region (falta api)
+                            </option>
+                            <option value="2">Vzla</option>
+                            <option value="3">USA</option>
+                            <option value="4">España</option>
+                          </select>
+                        </div>
                       </div>
                     </div>
-
-                    <div className="mb-4">
-                      <select className="select">
+                    <div>
+                      <label
+                          htmlFor="juegosPicker"
+                          className="form-label"
+                          onChange={datosRegistro}
+                          >
+                            Escoge tus juegos favoritos!
+                      </label>
+                      <div className="mb-4">
+                      <select className="select" id="juegosPicker">
                         <option value="1" disabled>
                           Juegos Favoritos
                         </option>
@@ -145,8 +194,8 @@ export const Register = () => {
                         <option value="4">Counter Strike</option>
                         <option value="5">FIFA</option>
                       </select>
+                      </div>
                     </div>
-
                     <button
                       type="submit"
                       className="btn btn-primary btn-lg mb-1"
