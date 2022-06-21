@@ -13,16 +13,16 @@ export const Home = () => {
     {/* div con clase Home: incluye carousel y las formas de registro */}
       <div
         id="carouselExampleCaptions"
-        class="carousel slide"
+        className="carousel slide"
         data-bs-ride="false"
       >
       {/* Carousel */}
-        <div class="carousel-indicators">
+        <div className="carousel-indicators">
           <button
             type="button"
             data-bs-target="#carouselExampleCaptions"
             data-bs-slide-to="0"
-            class="active"
+            className="active"
             aria-current="true"
             aria-label="Slide 1"
           ></button>
@@ -39,74 +39,80 @@ export const Home = () => {
             aria-label="Slide 3"
           ></button>
         </div>
-        <div class="carousel-inner">
-          <div class="carousel-item active" data-bs-interval="3500">
-            <img src="https://thumbs.dreamstime.com/b/rainbow-love-heart-background-red-wood-60045149.jpg" class="d-flex w-100" alt="..." />
-            <div class="carousel-caption d-none d-md-block">
-              <h5>First slide label</h5>
+        <div className="carousel-inner">
+          <div className="carousel-item active" data-bs-interval="3500">
+            <img src="https://thumbs.dreamstime.com/b/rainbow-love-heart-background-red-wood-60045149.jpg" className="d-flex w-100" alt="..." />
+            <div className="carousel-caption d-none d-md-block">
+              <h5>Crea tu cuenta!</h5>
               <p>
-                Some representative placeholder content for the first slide.
+                Simplemente dirígete a /registrarse o presiona el botón de "Registrarse"
               </p>
             </div>
           </div>
-          <div class="carousel-item" data-bs-interval="3500">
-            <img src="https://images.pexels.com/photos/674010/pexels-photo-674010.jpeg?cs=srgb&dl=pexels-anjana-c-674010.jpg&fm=jpg" class="d-flex w-100" alt="..." />
-            <div class="carousel-caption d-none d-md-block">
-              <h5>Second slide label</h5>
+          <div className="carousel-item" data-bs-interval="3500">
+            <img src="https://images.pexels.com/photos/674010/pexels-photo-674010.jpeg?cs=srgb&dl=pexels-anjana-c-674010.jpg&fm=jpg" className="d-flex w-100" alt="..." />
+            <div className="carousel-caption d-none d-md-block">
+              <h5>Publica tu anuncio o descubre anuncios de los demás!</h5>
               <p>
-                Some representative placeholder content for the second slide.
+                Podrás filtrar por juegos favoritos y tu región actual para encontrar tu compañero perfecto
               </p>
             </div>
           </div>
-          <div class="carousel-item" data-bs-interval="3500">
-            <img src="https://thumbs.dreamstime.com/b/hands-making-love-heart-shadow-rainbow-background-colors-painted-slats-weathered-wood-36340314.jpg" class="d-flex w-100" alt="..." />
-            <div class="carousel-caption d-none d-md-block">
-              <h5>Third slide label</h5>
+          <div className="carousel-item" data-bs-interval="3500">
+            <img src="https://thumbs.dreamstime.com/b/hands-making-love-heart-shadow-rainbow-background-colors-painted-slats-weathered-wood-36340314.jpg" className="d-flex w-100" alt="..." />
+            <div className="carousel-caption d-none d-md-block">
+              <h5>Conéctate y disfruta!</h5>
               <p>
-                Some representative placeholder content for the third slide.
+                Juega con tus nuevos amigos y pásala increíble
               </p>
             </div>
           </div>
         </div>
         <button
-          class="carousel-control-prev"
+          className="carousel-control-prev"
           type="button"
           data-bs-target="#carouselExampleCaptions"
           data-bs-slide="prev"
         >
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Previous</span>
+          <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span className="visually-hidden">Previous</span>
         </button>
         <button
-          class="carousel-control-next"
+          className="carousel-control-next"
           type="button"
           data-bs-target="#carouselExampleCaptions"
           data-bs-slide="next"
         >
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Next</span>
+          <span className="carousel-control-next-icon" aria-hidden="true"></span>
+          <span className="visually-hidden">Next</span>
         </button>
       </div>
 	    <div className="registro-home text-center">
       {/* Div del lado derecho con opciones de registrarte e iniciar sesion */}
-		<p>Regístrate ahora!</p>
-    <Link to="/registrarse" className="btn btn-dark">Register</Link>
-		<p>Si ya tienes cuenta... Inicia sesión aquí!</p>
-    <Link to="/login" className="btn btn-dark">Log In</Link>
+        <div className="register-links">
+          <div className="register-now col-md-8 offset-md-2">
+            <p>Regístrate ahora!</p>
+            <Link to="/registrarse" className="btn btn-registro btn-dark">Register</Link>
+          </div>
+          <div className="register-now col-md-8 offset-md-2">
+            <p>Si ya tienes cuenta... Inicia sesión aquí!</p>
+            <Link to="/login" className="btn btn-registro btn-dark">Log In</Link>
+          </div>
+        </div>
 	    </div>
     </div>
     <div className="sobre-nosotros">
       {/* incluye solo el final de la pagina con nuestra info */}
       <p className="sn-titulo">Sobre Nosotros...</p>
-        <div className="sn-persona1">
+        <div className="sn-persona1 col-md-8 offset-md-2">
           <img className="sn-img1" src="https://wtwp.com/wp-content/uploads/2015/06/placeholder-image.png"/>
-          <p className="sn-texto">Alfonso Mendez</p>
-          <div className="sn-cuerpo">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</div>
+          <div className="sn-texto1">Alfonso Méndez</div>
+          <div className="sn-cuerpo1">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</div>
         </div>
-        <div className="sn-persona2">
+        <div className="sn-persona2 col-md-8 offset-md-2">
           <img className="sn-img2" src="https://wtwp.com/wp-content/uploads/2015/06/placeholder-image.png"/>
-          <p className="sn-texto2">Framberling Barrios</p>
-          <div className="sn-cuerpo">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</div>
+          <div className="sn-texto2">Framberling Barrios</div>
+          <div className="sn-cuerpo2">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</div>
         </div>
       </div>
     </>

@@ -10,7 +10,7 @@ export const Register = () => {
     password: "",
     confirmPassword: "",
     email: "",
-    date: ""
+    birthdate: ""
   });
 
   const [showPassword, setShowPassword] = useState(false);
@@ -198,7 +198,7 @@ export const Register = () => {
                           <label
                             htmlFor="exampleDatepicker1"
                             className="form-label"
-                            value={register.date}
+                            value={register.birthdate}
                             onChange={datosRegistro}
                           >
                             Fecha de nacimiento

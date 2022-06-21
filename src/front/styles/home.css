@@ -1,6 +1,7 @@
 body {
     background-color: #151E3D;
-    /* font-family: ; */
+    font-family: 'Nunito', sans-serif;
+    font-weight: 500;
 }
 
 .home {
@@ -11,16 +12,24 @@ body {
 }
 .carousel {
     min-width: 48%;
-    min-height: 600px;
+    min-height: 700px;
     border: solid #0f0a1f;
     border-radius: 15px;
 }
 .carousel-inner img {
-    min-width: 250px;
-    max-height: 400px;
+    width: 250px;
+    height: 700px;
+    object-fit: cover;
     justify-content: center;
     border-radius: 15px;
 }
+
+.carousel-caption {
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: 10px;
+}
+
+/* lado derecho del div home */
 .registro-home {
     min-width: 50%;
     color: white;
@@ -29,17 +38,44 @@ body {
     margin: 0px 15px;
     font-size: 30px;
 }
+.register-links {
+    margin-top: 130px;
+}
+.register-now {
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 15px;
+    margin-bottom: 100px;
+}
+.btn-registro {
+    height: 50px;
+    width: 115px;
+    font-size: 25px;
+    border-radius: 20px;
+}
+/* lado derecho del div home */
+
 .sobre-nosotros {
     color: white;
     margin: 15px;
+}
+/* titulo Sobre Nosotros... */
+.sn-titulo {
+    text-align: center;
+    font-size: 35px;
+    background-color: #0f0a1f;
+    border-radius: 15px;
 }
 /* clases con sn al principio: sobre nosotros abreviado */
 .sn-persona1 {
     display: flex;
     padding: 30px 0px;
+    max-width: 1200px;
 }
 .sn-persona2 {
+    max-width: 1200px;
     padding: 30px 0px;
+    padding-bottom: 50px;
 }
 /* img Alfonso */
 .sn-img1 {
@@ -51,31 +87,35 @@ body {
 }
 /* img Framberling */
 .sn-img2 {
-    width: 300px;
+    max-width: 300px;
     height: 200px;
     border: solid #0f0a1f;
     border-radius: 15px;
     float: right;
 }
-/* titulo Sobre Nosotros... */
-.sn-titulo {
-    text-align: center;
-    font-size: 35px;
-    background-color: #0f0a1f;
-    border-radius: 15px;
-}
 /* texto Alfonso */
-.sn-texto {
+.sn-texto1 {
     font-size: 20px;
-    padding: 15px;
+    padding: 30px;
+    margin-top: 50px;
+    min-width: 220px;
+    font-weight: 600;
 }
 /* texto Framberling */
 .sn-texto2 {
     font-size: 20px;
-    padding: 15px;
+    padding: 30px 30px 50px 30px;
+    margin-top: 50px;
     float: right;
+    font-weight: 600;
 }
 /* descripciones sobre nosotros */
-/* .sn-cuerpo {
-    
-} */
+.sn-cuerpo1 {
+    max-width: 800px;
+    margin-top: 30px;
+}
+
+.sn-cuerpo2 {
+    max-width: 800px;
+    margin-top: 30px;
+}

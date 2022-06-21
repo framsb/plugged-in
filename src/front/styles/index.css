@@ -1,4 +1,14 @@
 .navbar {
     background-color: #1d2a57;
     color: white;
+    font-size: 20px;
+    text-decoration: none;
+}
+.btn-link {
+    color: white;
+    font-size: 20px;
+    text-decoration: none;
+}
+.btn-link:hover{
+    color: rgba(255, 255, 255, 0.7);
 }
