@@ -1,21 +1,22 @@
 from flask_sqlalchemy import SQLAlchemy
+from datetime import datetime
 
 db = SQLAlchemy()
 
 class User(db.Model):
-    __tablename__ = 'user'
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(120), unique=True, nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
     password = db.Column(db.String(80), unique=False, nullable=False)
+    birthdate = db.Column(db.Date, nullable=False)
     is_active = db.Column(db.Boolean(), unique=False, nullable=False)
-    imagen = db.Column(db.String(250))
-    fecha_registro = db.Column(db.Date, nullable=False)
+    registration_date = db.Column(db.DateTime, default=datetime.utcnow)
 
-    def __init__(self,name,email,password):
+    def __init__(self,username,email,password,birthdate):
         self.username = username
         self.email = email
         self.password = password
+        self.birthdate = birthdate
         self.is_active = True
     
     def __repr__(self):
@@ -24,41 +25,43 @@ class User(db.Model):
     def serialize(self):
         return {
             "id": self.id,
+            "username": self.username,
             "email": self.email,
-            "username": self.username
             # do not serialize the password, its a security breach
         }
 
-class User_Profile(db.Model):
-    __tablename__ = 'user_profile'
+class Profile(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    user = db.Column(db.Integer, db.ForeignKey("user.id"))
+    user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
     about_me = db.Column(db.String(250), unique=True, nullable=False)
-    #games_fav = db.relationship()
-    #user_id = db.relationship()
-
+    image = db.Column(db.String(240), nullable=True)
+    post_id = db.relationship('Post_user', backref='post', lazy=True)
+    friends = db.relationship('Friends', backref='Friends', lazy=True)
+    
 class Post_user(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    post = db.Column(db.String(250), unique=True, nullable=False)
+    post_name = db.Column(db.String(150), unique=True, nullable=False)
+    post_description =db.Column(db.String(400), unique=True, nullable=False)
+    posted = db.Column(db.DateTime, nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('profile.id'))
+
+class Friends(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_from_id = db.Column(db.Integer, db.ForeignKey("profile.id"))
+
+class Comment(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    author_id = db.Column(db.Integer, db.ForeignKey("profile.id"))
+    created = db.Column(db.DateTime, nullable=False) #fecha de creacion
+    comment_content = db.Column(db.String(400))
+    post_id = db.Column(db.Integer, db.ForeignKey("post_user.id"))
 
 class Games(db.Model):
-    __tablename__ = 'games'
     id = db.Column(db.Integer, primary_key=True)
+    games = db.Column(db.String(100), unique=True, nullable=False)
+    genre = db.Column(db.String(100), unique=True, nullable=False)
     # Api por decidir, si no manual
     # Nombre, año, plataforma
 
-class Amigos(db.Model):
-    __tablename__ = 'amigos'
-    id = db.Column(db.Integer, primary_key=True)
-    user_from_id = db.Column(db.Integer, db.ForeignKey("user.id"))
-    user_to_id = db.Column(db.Integer, db.ForeignKey("user.id"))
-
-class Comment(db.Model):
-    __tablename__ = 'comment'
-    id = db.Column(db.Integer, primary_key=True)
-    author_id = db.Column(db.String, db.ForeignKey("user.id"))
-    created = db.Column(db.Date, nullable=False) #fecha de creacion
-    #post_id =
-    comment_content = db.Column(db.String(140))
-    # post = db.relationship
-    user = db.relationship("User")
+    
+   

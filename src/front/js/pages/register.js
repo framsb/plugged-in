@@ -14,12 +14,19 @@ export const Register = () => {
   });
 
   const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
-// const [errors, setErrors] = useState({}) -> regex y condiciones para el submit
+// condiciones para el submit
+  const [errors, setErrors] = useState({
+    username: false,
+    email: false,
+    password: false,
+    confirmPassword: false,
+  });
 
-  let usernamergx = /^[a-zA-Z0-9](_(?!(\.|_))|\.(?!(_|\.))|[a-zA-Z0-9]){6,18}[a-zA-Z0-9]$/;
-  let emailrgx = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-  let usernameregex = /^(?=[a-zA-Z0-9]{8,20}$)$/;
+
+  let usernamergx = /^(?=[a-zA-Z0-9._]{5,20}$)[^_.].*[^_.]$/;
+  let emailrgx = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
   let passwordregex = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/; // 
 
   const datosRegistro = (e) => {
@@ -59,7 +66,17 @@ export const Register = () => {
                             value={register.username}
                             onChange={datosRegistro}
                             className="form-control"
+                            onBlur={(e) => {
+                              if (usernamergx.test(register.username)) {
+                                setErrors({ ...errors, username: false });
+                              } else {
+                                setErrors({ ...errors, username: true });
+                              }
+                            }}
                           />
+                          {errors.username && (
+                        <div className="text-secondary">Username inválido: 5-20 caracteres (letras, numeros y . _), sin . o _ al final o al principio </div>
+                      )}
                         </div>
                         <div className="col-9 form-outline mb-4">
                           <label
@@ -75,7 +92,17 @@ export const Register = () => {
                             onChange={datosRegistro}
                             id="form3Example2q"
                             className="form-control"
+                            onBlur={(e) => {
+                              if (emailrgx.test(register.email)) {
+                                setErrors({ ...errors, email: false });
+                              } else {
+                                setErrors({ ...errors, email: true });
+                              }
+                            }}
                           />
+                          {errors.email && (
+                          <div className="text-secondary">Correo electrónico inválido</div>
+                          )}
                         </div>
                       </div>
                       <div className="row">
@@ -94,11 +121,18 @@ export const Register = () => {
                             className="form-control"
                             value={register.password}
                             onChange={datosRegistro}
+                            onBlur={(e) => {
+                              if (passwordregex.test(register.password)) {
+                                setErrors({ ...errors, password: false });
+                              } else {
+                                setErrors({ ...errors, password: true });
+                              }
+                            }}
                           />
                           <button
                           className={
                             showPassword
-                              ? "fa fa-eye-slash btn btn-password btn-outline-dark"
+                              ? "fa fa-eye-slash password-icon btn btn-password btn-outline-dark"
                               : "fa fa-eye password-icon btn btn-outline-dark"
                           }
                           onClick={(e) => {
@@ -107,6 +141,13 @@ export const Register = () => {
                           }}
                           ></button>
                           </div>
+                          {errors.password && (
+                        <div className="text-secondary">
+                          Recuerda que tu contraseña debe tener: 8
+                          caracteres, 1 letra minúscula, 1 letra mayúscula,
+                          1 número y 1 caracter especial.
+                        </div>
+                      )}
                         </div>
                         <div className="col-md-9 form-outline mb-4">
                           <label
@@ -119,24 +160,37 @@ export const Register = () => {
 
                           <input
                             name="confirmPassword"
-                            type={showPassword ? "text" : "password"}
+                            type={showConfirmPassword ? "text" : "password"}
                             id="form3Example4q"
                             className="form-control"
                             value={register.confirmPassword}
                             onChange={datosRegistro}
+                            onBlur={(e) => {
+                              if (register.confirmPassword !== register.password) {
+                                setErrors({ ...errors, confirmPassword: true });
+                              } else {
+                                setErrors({ ...errors, confirmPassword: false });
+                              }
+                            }}
                             />
+                            
                           <button
                           className={
-                            showPassword
-                            ? "fa fa-eye-slash btn btn-password btn-outline-dark"
+                            showConfirmPassword
+                            ? "fa fa-eye-slash password-icon btn btn-password btn-outline-dark"
                             : "fa fa-eye password-icon btn btn-outline-dark"
                           }
                           onClick={(e) => {
                             e.preventDefault();
-                            setShowPassword(!showPassword);
+                            setShowConfirmPassword(!showConfirmPassword);
                           }}
                           ></button>
                           </div>
+                          {errors.confirmPassword && (
+                        <div className="text-secondary">
+                          Contraseña distinta, intente otra vez
+                        </div>
+                      )}
                         </div>
                       </div>
                       <div className="col-md-6 mb-4">
@@ -155,45 +209,6 @@ export const Register = () => {
                             id="exampleDatepicker1"
                           />
                         </div>
-                      </div>
-                      <div>
-                        <label
-                          htmlFor="regionPicker"
-                          className="form-label"
-                          onChange={datosRegistro}
-                          >
-                            Escoge tu region!
-                        </label>
-                        <div className="col-md-8 mb-4">
-                          <select className="select" id="regionPicker">
-                            <option value="1" disabled>
-                              Region (falta api)
-                            </option>
-                            <option value="2">Vzla</option>
-                            <option value="3">USA</option>
-                            <option value="4">España</option>
-                          </select>
-                        </div>
-                      </div>
-                    </div>
-                    <div>
-                      <label
-                          htmlFor="juegosPicker"
-                          className="form-label"
-                          onChange={datosRegistro}
-                          >
-                            Escoge tus juegos favoritos!
-                      </label>
-                      <div className="mb-4">
-                      <select className="select" id="juegosPicker">
-                        <option value="1" disabled>
-                          Juegos Favoritos
-                        </option>
-                        <option value="2">Call of Duty</option>
-                        <option value="3">Fortnite</option>
-                        <option value="4">Counter Strike</option>
-                        <option value="5">FIFA</option>
-                      </select>
                       </div>
                     </div>
                     <button

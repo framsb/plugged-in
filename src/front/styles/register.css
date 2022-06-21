@@ -7,3 +7,17 @@ body {
 .password-icon {
     margin-left: 10px;
 }
+.imagen-registro {
+    width: 400px;
+    height: 400px;
+}
+.formRegistro {
+    display: flex;
+}
+
+.formControl{
+    padding-left: 40px;
+    height: 40px;
+    border-radius: 3px;
+    border-color: rgb(150, 150, 150);
+}
