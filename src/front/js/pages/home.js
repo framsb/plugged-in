@@ -11,6 +11,19 @@ export const Home = () => {
     <>
     <div className="home">
     {/* div con clase Home: incluye carousel y las formas de registro */}
+	    <div className="registro-home text-center">
+      {/* Div del lado derecho con opciones de registrarte e iniciar sesion */}
+        <div className="register-links">
+          <div className="register-now col-md-8 offset-md-2">
+            <p>Regístrate ahora!</p>
+            <Link to="/registrarse" className="btn btn-registro btn-dark">Register</Link>
+          </div>
+          <div className="register-now col-md-8 offset-md-2">
+            <p>Si ya tienes cuenta... Inicia sesión aquí!</p>
+            <Link to="/login" className="btn btn-registro btn-dark">Log In</Link>
+          </div>
+        </div>
+	    </div>
       <div
         id="carouselExampleCaptions"
         className="carousel slide"
@@ -87,19 +100,6 @@ export const Home = () => {
           <span className="visually-hidden">Next</span>
         </button>
       </div>
-	    <div className="registro-home text-center">
-      {/* Div del lado derecho con opciones de registrarte e iniciar sesion */}
-        <div className="register-links">
-          <div className="register-now col-md-8 offset-md-2">
-            <p>Regístrate ahora!</p>
-            <Link to="/registrarse" className="btn btn-registro btn-dark">Register</Link>
-          </div>
-          <div className="register-now col-md-8 offset-md-2">
-            <p>Si ya tienes cuenta... Inicia sesión aquí!</p>
-            <Link to="/login" className="btn btn-registro btn-dark">Log In</Link>
-          </div>
-        </div>
-	    </div>
     </div>
     <div className="sobre-nosotros">
       {/* incluye solo el final de la pagina con nuestra info */}

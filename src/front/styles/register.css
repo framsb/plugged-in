@@ -21,3 +21,45 @@ body {
     border-radius: 3px;
     border-color: rgb(150, 150, 150);
 }
+
+.Container-Input{
+    background: none;
+    padding-right: 50px;
+    position: relative;
+    margin:absolute;
+}
+
+.Container-Input input{
+    border-image-source: linear-gradient(90deg, #020024 0%, #090979 35%, #00d4ff 100%);
+    border-width: 0 0 1px;
+    border-image-slice: 1;
+    width: 100%;
+    padding: 12px 12px 12px 12px;
+    
+}
+
+.Container-Input label{
+    position: absolute;
+    bottom: 0.8rem;
+    left: 11px;
+    color: grey;
+    pointer-events: none;
+    transition: all 0.3s ease;
+}
+.Container-Input input:valid ~ label,
+.Container-Input input:focus ~ label{
+    transform: translateY(-30px);
+    font-size: 10px;
+    background: white;
+}
+
+input:focus{
+    border-image-source: linear-gradient(90deg,#00d4ff 0% , #090979 35% ,#020024 100% );
+    border-width: 0 0 1px;
+    border-image-slice: 1;
+    outline: none;
+}
+
+.errorinput{
+    background: black;
+}

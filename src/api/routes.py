@@ -5,6 +5,7 @@ from flask import Flask, request, jsonify, url_for, Blueprint
 from api.models import db, User
 from api.utils import generate_sitemap, APIException
 from flask_jwt_extended import create_access_token, get_jwt_identity, jwt_required, JWTManager
+import json
 
 api = Blueprint('api', __name__)
 
@@ -17,21 +18,24 @@ def handle_hello():
     }
     return jsonify(response_body), 200
 
-@api.route('/sign-in', methods=['POST'])
-def handle_login():
+@api.route('/registrarse', methods=['POST'])
+def handle_register():
 
     data = request.data
-    data_decode = json.loads(data)
-    user = User.query.filter_by(**data_decode).first()
-    if user is None:  
+    data_decoded = json.loads(data)
+    newUser = User(**data_decoded)
+    user = User.query.filter_by(email=newUser.email,password=newUser.password).first()
+    if user is None:
+        db.session.add(newUser)
+        db.session.commit()
+        access_token = create_access_token(identity=newUser.id)
         response_body = {
-            "message": "Credenciales Inválidas"
-        }
-        return jsonify(response_body), 400
-    else :
-        access_token = create_access_token(identity=user.id)
-        response_body = {
-            "message": "La logacion con exito",
+            "message": "Usuario creado con exito",
             "token":access_token
         }
         return jsonify(response_body), 200
+    else :
+        response_body = {
+            "message": "Usuario ya existe lol"
+        }
+        return jsonify(response_body), 400
