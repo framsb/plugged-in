@@ -1,5 +1,6 @@
 body {
     background-color: #151E3D;
+    color: black;
 }
 .input-btn {
     display: flex;
@@ -7,24 +8,10 @@ body {
 .password-icon {
     margin-left: 10px;
 }
-.imagen-registro {
-    width: 400px;
-    height: 400px;
-}
-.formRegistro {
-    display: flex;
-}
-
-.formControl{
-    padding-left: 40px;
-    height: 40px;
-    border-radius: 3px;
-    border-color: rgb(150, 150, 150);
-}
 
 .Container-Input{
     background: none;
-    padding-right: 50px;
+    padding-right: 150px;
     position: relative;
     margin:absolute;
 }
@@ -62,4 +49,52 @@ input:focus{
 
 .errorinput{
     background: black;
+}
+
+.FloatIcon{
+    position: absolute;
+    left:75%;
+    color: red;
+}
+
+.FloatIcon:hover{
+    color: red;
+    border-color:white;
+}
+.register-container {
+    max-width: 1200px;
+    margin: auto;
+    margin-top: 50px; 
+}
+
+.card {
+    width: 700px;
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+.card-body {
+    padding: 0;
+    flex: 0;
+}
+
+/* div de la imagen */
+.register-photo {
+    display: flex;
+    width: 500px;
+    height: auto;
+}
+/* imagen */
+.img-fluid {
+    object-fit: cover;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+
+.registro-titulo {
+    padding: 20px;
+    font-size: 35px;
+    font-weight: 600;
+    text-align: center;
 }

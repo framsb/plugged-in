@@ -1,0 +1,80 @@
+.encontrar-gamers {
+    color: white;
+}
+
+/* Bienvenido a Plugged In */
+.titulo-principal {
+    text-align: center;
+    font-weight: 600;
+    font-size: 35px;
+    padding: 15px;
+    border-bottom: solid #8276a8;
+    color: aqua;
+}
+
+/* divs que agrupan "Publica tu anuncio! */
+.publicar-anuncio {
+    border-bottom: solid #8276a8;
+}
+
+.form-group {
+    padding: 35px;
+    max-width: 1400px;
+}
+/* divs que agrupan "Publica tu anuncio! */
+
+/* "Publica tu anuncio" y "Anuncios Publicados" Titulo */
+.titulo-textarea  {
+    font-size: 25px;
+    padding: 15px;
+    color: white;
+    background-color: rgba(0, 255, 255, 0.048);
+    border-radius: 15px;
+}
+
+.cuerpo-textarea {
+    background-color: rgb(172, 248, 248);
+}
+
+.cuerpo-textarea:focus {
+    background-color: aqua;
+}
+
+.dropdown {
+    margin: 0px 15px;
+}
+
+/* div que agrupa "Anuncios Publicados */
+.anuncios-publicados {
+    padding: 35px;
+
+}
+
+/* informacion del user en el anuncio */
+.user-anuncio {
+    color: white;
+    padding: 20px;
+    margin: auto;
+}
+
+.info-anuncio {
+    display: flex;
+    padding: 5px 15px;
+    font-size: 20px;
+}
+
+.cuerpo-anuncio {
+    padding: 5px 15px;
+    width: 800px;
+    height: 150px;
+    border: solid #8276a8;
+    border-radius: 5px;
+}
+
+.contacto-anuncio {
+    padding: 5px 15px;
+    margin-left: 10px;
+    width: 400px;
+    border: solid #8276a8;
+    border-radius: 5px;
+}

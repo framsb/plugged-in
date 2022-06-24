@@ -36,6 +36,48 @@ def handle_register():
         return jsonify(response_body), 200
     else :
         response_body = {
-            "message": "Usuario ya existe lol"
+            "message": "Usuario ya existe"
         }
         return jsonify(response_body), 400
+
+@api.route('/iniciar-sesion', methods=['POST'])
+def handle_login():
+
+    data = request.data
+    data_decoded = json.loads(data)
+    user = User.query.filter_by(**data_decoded).first()
+    if user is None:  
+        response_body = {
+            "message": "Credenciales Inválidas"
+        }
+        return jsonify(response_body), 400
+    else :
+        access_token = create_access_token(identity=user.id)
+        response_body = {
+            "message": "Iniciado sesión con éxito",
+            "token":access_token
+        }
+        return jsonify(response_body), 200
+
+@api.route("/encontrar-gamers",methods=["POST"])
+@jwt_required()
+def handle_private():
+    current_user = get_jwt_identity()
+    return jsonify(current_user), 200
+
+# @app.route('/juegos', methods=['POST'])
+# def handle_games():
+
+#     response = requests.post("https://api.igdb.com/v4/games")
+#     response_decoded = response.json()
+#     people = People.query.all()
+#     if len(people) == 0:
+#         for people in response_decoded['results']:
+#             response_one_person = requests.get(people["url"])
+#             response_one_person_decoded = response_one_person.json()
+#             response_one_person_decoded['result']
+#             one_person = People(**response_one_person_decoded['result']['properties'],_id=response_one_person_decoded['result']['_id'],uid=response_one_person_decoded['result']['uid'])
+#             db.session.add(one_person)
+#         db.session.commit()
+
+#     return response_decoded, 200

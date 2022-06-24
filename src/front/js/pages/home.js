@@ -20,7 +20,7 @@ export const Home = () => {
           </div>
           <div className="register-now col-md-8 offset-md-2">
             <p>Si ya tienes cuenta... Inicia sesión aquí!</p>
-            <Link to="/login" className="btn btn-registro btn-dark">Log In</Link>
+            <Link to="/iniciar-sesion" className="btn btn-registro btn-dark">Log In</Link>
           </div>
         </div>
 	    </div>

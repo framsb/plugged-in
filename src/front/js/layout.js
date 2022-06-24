@@ -11,6 +11,9 @@ import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
 import { Register } from "./pages/register"
 import { LogIn } from "./pages/login"
+import { EncontrarGamers } from "./pages/encontrar-gamers";
+import { Perfil } from "./pages/perfil"
+
 
 //create your first component
 const Layout = () => {
@@ -30,11 +33,14 @@ const Layout = () => {
             <Route exact path="/registrarse">
               <Register />
             </Route>
-            <Route exact path="/login">
+            <Route exact path="/encontrar-gamers">
+              <EncontrarGamers />
+            </Route>
+            <Route exact path="/iniciar-sesion">
               <LogIn />
             </Route>
-            <Route exact path="/single/:theid">
-              <Single />
+            <Route exact path="/tu-perfil">
+              <Perfil />
             </Route>
             <Route>
               <h1>Not found!</h1>

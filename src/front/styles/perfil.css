@@ -1,0 +1,28 @@
+
+.perfil {
+    border: solid rgba(0, 255, 255, 0.479);
+    border-radius: 15px;
+    margin: auto;
+    margin-top: 25px;
+    height: 700px;
+    max-width: 1200px;
+    color: white;
+}
+/* div que agrupa al lado izquierdo del perfil */
+.img-username {
+    max-width: 450px;
+}
+
+.image {
+    padding: 20px;
+}
+.image img {
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.username {
+    font-size: 40px;
+    font-weight: 600;
+    text-align: center;
+}
