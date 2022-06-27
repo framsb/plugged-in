@@ -28,16 +28,16 @@ export const EncontrarGamers = (props) => {
       <div className="publicar-anuncio">
         <div className="form-group shadow-textarea">
           <label
-            htmlfor="exampleFormControlTextarea6"
+            htmlFor="exampleFormControlTextarea6"
             className="titulo-textarea mb-3"
           >
             Publica tu anuncio
           </label>
           <div className="info-user d-flex">
             <p>Escoge el juego que deseas jugar:</p>
-            <div class="dropdown">
+            <div className="dropdown">
               <button
-                class="btn btn-primary dropdown-toggle"
+                className="btn btn-primary dropdown-toggle"
                 type="button"
                 id="dropdownMenuButton1"
                 data-bs-toggle="dropdown"
@@ -45,19 +45,19 @@ export const EncontrarGamers = (props) => {
               >
                 Juegos Favoritos
               </button>
-              <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+              <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                 <li>
-                  <a class="dropdown-item" href="#">
+                  <a className="dropdown-item" href="#">
                     Action
                   </a>
                 </li>
                 <li>
-                  <a class="dropdown-item" href="#">
+                  <a className="dropdown-item" href="#">
                     Another action
                   </a>
                 </li>
                 <li>
-                  <a class="dropdown-item" href="#">
+                  <a className="dropdown-item" href="#">
                     Something else here
                   </a>
                 </li>
@@ -65,9 +65,9 @@ export const EncontrarGamers = (props) => {
             </div>
             <div className="info-user d-flex">
               <p>Escoge tu región actual:</p>
-            <div class="dropdown">
+            <div className="dropdown">
               <button
-                class="btn btn-primary dropdown-toggle"
+                className="btn btn-primary dropdown-toggle"
                 type="button"
                 id="dropdownMenuButton1"
                 data-bs-toggle="dropdown"
@@ -75,19 +75,19 @@ export const EncontrarGamers = (props) => {
               >
                 Regiones
               </button>
-              <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+              <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                 <li>
-                  <a class="dropdown-item" href="#">
+                  <a className="dropdown-item" href="#">
                     Action
                   </a>
                 </li>
                 <li>
-                  <a class="dropdown-item" href="#">
+                  <a className="dropdown-item" href="#">
                     Another action
                   </a>
                 </li>
                 <li>
-                  <a class="dropdown-item" href="#">
+                  <a className="dropdown-item" href="#">
                     Something else here
                   </a>
                 </li>
@@ -118,6 +118,7 @@ export const EncontrarGamers = (props) => {
       </div>
       <div className="anuncios-publicados">
           <label
+            htmlFor=""
             className="titulo-textarea mb-3"
           >
             Anuncios Publicados

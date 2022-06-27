@@ -26,3 +26,8 @@
     font-weight: 600;
     text-align: center;
 }
+
+.card {
+    display: flex;
+    color: black;
+}

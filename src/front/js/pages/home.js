@@ -54,7 +54,7 @@ export const Home = () => {
         </div>
         <div className="carousel-inner">
           <div className="carousel-item active" data-bs-interval="3500">
-            <img src="https://thumbs.dreamstime.com/b/rainbow-love-heart-background-red-wood-60045149.jpg" className="d-flex w-100" alt="..." />
+            <img src="https://static9.depositphotos.com/1003924/1208/i/450/depositphotos_12087544-stock-photo-register-key-concept.jpg" alt="..." />
             <div className="carousel-caption d-none d-md-block">
               <h5>Crea tu cuenta!</h5>
               <p>
@@ -63,7 +63,7 @@ export const Home = () => {
             </div>
           </div>
           <div className="carousel-item" data-bs-interval="3500">
-            <img src="https://images.pexels.com/photos/674010/pexels-photo-674010.jpeg?cs=srgb&dl=pexels-anjana-c-674010.jpg&fm=jpg" className="d-flex w-100" alt="..." />
+            <img src="https://www.incimages.com/uploaded_files/image/1920x1080/getty_816882180_350503.jpg" className="d-flex w-100" alt="..." />
             <div className="carousel-caption d-none d-md-block">
               <h5>Publica tu anuncio o descubre anuncios de los demás!</h5>
               <p>
@@ -72,7 +72,7 @@ export const Home = () => {
             </div>
           </div>
           <div className="carousel-item" data-bs-interval="3500">
-            <img src="https://thumbs.dreamstime.com/b/hands-making-love-heart-shadow-rainbow-background-colors-painted-slats-weathered-wood-36340314.jpg" className="d-flex w-100" alt="..." />
+            <img src="https://thebusinessofesports.com/wp-content/uploads/2022/03/gig-gaming-friends.png" className="d-flex w-100" alt="..." />
             <div className="carousel-caption d-none d-md-block">
               <h5>Conéctate y disfruta!</h5>
               <p>

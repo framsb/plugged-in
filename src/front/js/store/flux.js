@@ -30,6 +30,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				if (response.status == 200) {
 				  let data = await response.json();
 				  localStorage.setItem("token", data.token);
+				  setStore({isLoggedIn: true})
 				  return true;
 				} else return false;
 			},
@@ -62,31 +63,35 @@ const getState = ({ getStore, getActions, setStore }) => {
 				  },
 				});
 				let data = await response.json();
-				console.log("Esta es mi data privada", data);
+				// console.log("Esta es mi data privada", data);
 			  },
 
 			loadRegions: async () => {
-			try{	
+			try {	
 			 	let response = await fetch("https://restcountries.com/v3.1/subregion/europe");
 			 	const data = await response.json();
 			 	//setStore({ europe: data});
 				console.log(data)
-			}catch(error){console.log(error)}
+			} catch(error){console.log(error)}
 			},
 			
+
 			loadGames: async () => {
-				const url = "https://api.igdb.com/v4/games";
-				let response = await fetch(url ,{
-					method: "POST",
-					headers: {
-						"Content-Type": "application/json",
-						"Client-ID": "vv0iej57iqk1yc5vok6jxv5qwewuih",
-						Authorization: "Bearer m62v47lki4it9tj1uku36n7x58fsc0"
-					},
-				});
-				const data = await response.json();
-				setStore({ games: data.results })
-				console.log("Estos son mis juegos", data);
+				const url = "https://circumvent-cors.herokuapp.com/https://api.igdb.com/v4/games/";
+				try {
+					let response = await fetch(url ,{
+						method: "POST",
+						headers: {
+							"Content-Type": "application/json",
+							"Client-ID": "vv0iej57iqk1yc5vok6jxv5qwewuih",
+							Authorization: "Bearer m62v47lki4it9tj1uku36n7x58fsc0"
+						},
+						body: "fields name; where rating > 95;"
+					});
+					const data = await response.json();
+					setStore({ games: data })
+					console.log(data);
+				} catch(error){console.log(error)}
 			},
 
 			getMessage: () => {

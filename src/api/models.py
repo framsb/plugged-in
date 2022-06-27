@@ -37,6 +37,10 @@ class Profile(db.Model):
     image = db.Column(db.String(240), nullable=True)
     post_id = db.relationship('Post_user', backref='post', lazy=True)
     friends = db.relationship('Friends', backref='Friends', lazy=True)
+
+    
+
+
     
 class Post_user(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -58,10 +62,16 @@ class Comment(db.Model):
 
 class Games(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    games = db.Column(db.String(100), unique=True, nullable=False)
-    genre = db.Column(db.String(100), unique=True, nullable=False)
-    # Api por decidir, si no manual
-    # Nombre, año, plataforma
-
+    name = db.Column(db.String(100), unique=True, nullable=False)
+    genre = db.Column(db.String(100), unique=False, nullable=False)
+    game_modes = db.Column(db.String(100), unique=False, nullable=False)
+    release_dates = db.Column(db.Integer, unique=False)
+        
+    def __init__(self, id, name, genre, game_modes, release_dates):
+        self.id = id
+        self.name = name
+        self.genre = genre
+        self.game_modes = game_modes
+        self.release_dates = release_dates
     
    
