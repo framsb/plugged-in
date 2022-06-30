@@ -1,8 +1,11 @@
-import React, { useState, useContext } from "react";
+import { useState, useContext } from "react";
 import { Link, Redirect } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import { Context } from "../store/appContext";
 import "../../styles/login.css";
+import * as React from 'react';
+import Stack from '@mui/material/Stack';
+import Button from '@mui/material/Button';
 import fondoLogin from "../../img/Fondo-Login.jpg";
 
 export const LogIn = () => {
@@ -112,19 +115,18 @@ export const LogIn = () => {
                 </div>
               )}
             </div>
-            <button
-              type="button"
-              className="btn btn-primary btn-lg mt-3 mb-1"
+            <Button type="button"
+              className="mt-3 mb-1"
               onClick={handleSubmit}
               disabled={
                 errors.email ||
                 errors.password ||
                 !login.email.length > 0 ||
                 !login.password.length > 0
-              }
-            >
-              Iniciar Sesión
-            </button>
+              }variant="contained"
+              size="large">
+                Iniciar Sesión
+                </Button>
             <Link to="/registrarse">
                 <div className="redirect-link">
                   No tienes cuenta todavía? Crea una aquí

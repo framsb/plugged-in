@@ -4,6 +4,8 @@ import { useHistory } from "react-router-dom";
 import { Context } from "../store/appContext";
 import "../../styles/register.css";
 import ReactTooltip from 'react-tooltip'
+import Stack from '@mui/material/Stack';
+import Button from '@mui/material/Button';
 import fondoRegistro from "../../img/Fondo-Registro.jpg";
 
 export const Register = () => {
@@ -196,8 +198,7 @@ export const Register = () => {
                 </div>
               </div>
             </div>
-            <button
-              type="button"
+            <Button type="button"
               className="btn btn-primary btn-lg mt-3 mb-1"
               onClick={handleSubmit}
               disabled={
@@ -208,10 +209,10 @@ export const Register = () => {
                 !register.email.length > 0 ||
                 !register.password.length > 0 ||
                 !register.confirmPassword.length > 0
-              }
-            >
-              Registrarse
-            </button>
+              }variant="contained"
+              size="large">
+                Registrarse
+                </Button>
             <Link to="/iniciar-sesion">
                 <div className="redirect-link">
                   Ya creaste tu cuenta? Inicia sesión aquí

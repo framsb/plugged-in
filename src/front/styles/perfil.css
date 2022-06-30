@@ -4,10 +4,15 @@
     border-radius: 15px;
     margin: auto;
     margin-top: 25px;
-    height: 700px;
-    max-width: 1200px;
-    color: white;
+    height: auto;
+    max-width: 1250px;
+    color: rgb(255, 255, 255);
+    background-color: #151E3D;
+    padding-bottom: 20px;
 }
+/* body {
+    background-image: url("https://www.mhpcolorado.org/wp-content/uploads/2020/01/bigstock-Abstract-blue-background-wal-6002095.jpg");
+} */
 /* div que agrupa al lado izquierdo del perfil */
 .img-username {
     max-width: 450px;
@@ -15,6 +20,7 @@
 
 .image {
     padding: 20px;
+    padding-bottom: 0px;
 }
 .image img {
     border-radius: 50%;
@@ -25,9 +31,49 @@
     font-size: 40px;
     font-weight: 600;
     text-align: center;
+    padding-bottom: 15px;
+}
+
+.info-extra {
+    text-align: center;
+    color: rgba(255, 255, 255, 0.466);
+    padding-top: 5px;
+}
+.info-extra2 {
+    text-align: center;
+    color: rgba(255, 255, 255, 0.466);
 }
 
 .card {
     display: flex;
     color: black;
 }
+.btn-foto {
+    margin-top: 15px;
+    text-align: center;
+}
+
+.titulo-descripcion {
+    font-size: 20px;
+    font-weight: 600;
+    color: aqua;
+    padding-top: 15px;
+}
+.titulo-descripcion-username {
+    font-size: 25px;
+    font-weight: 700;
+    color: aqua;
+    padding-top: 15px;
+}
+.text-field {
+    padding: 15px;
+}
+
+.TextField {
+    color: white;
+    width: 100%;
+    padding: 5px;
+}
+
+/* padding-bottom: 15px;
+    border-bottom: solid rgba(214, 214, 214, 0.13); */

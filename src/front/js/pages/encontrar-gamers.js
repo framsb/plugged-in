@@ -180,6 +180,8 @@ export const EncontrarGamers = (props) => {
             </div>
           </div>
       </div>
+      {localStorage.getItem("token") == undefined && (<Redirect to={"/iniciar-sesion"}></Redirect>
+      )}
     </div>
   );
 };

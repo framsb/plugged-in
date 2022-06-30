@@ -2,7 +2,7 @@
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 from flask import Flask, request, jsonify, url_for, Blueprint
-from api.models import db, User
+from api.models import db, User, Profile
 from api.utils import generate_sitemap, APIException
 from flask_jwt_extended import create_access_token, get_jwt_identity, jwt_required, JWTManager
 import json
@@ -59,9 +59,38 @@ def handle_login():
         }
         return jsonify(response_body), 200
 
+@api.route('/detalles-usuario', methods=['GET','PUT'])
+@jwt_required()
+def handle_user_details():
+    if request.method == 'GET':
+        current_user = get_jwt_identity()
+        user = User.query.filter_by(id=current_user).one_or_none()
+        user_profile = Profile.query.filter_by(user_id = current_user).one_or_none()
+        newUser = user.serialize()
+        if user_profile is None:
+            return jsonify({"user_data":newUser})
+        user_details = user_profile.serialize()
+        data = {**newUser, **user_details}
+        return jsonify({"user_data":data}), 200
+    if request.method == 'PUT':
+        current_user = get_jwt_identity()
+        data = request.data
+        json_data = request.json
+        data_decoded = json.loads(data)
+        userProfile = Profile.query.filter_by(user_id=current_user).one_or_none()
+        if userProfile is None:
+            create_user_profile_data = Profile(user_id=current_user, about_me=json_data["about_me"], image=json_data['image'], favorite_games=json_data["favorite_games"], region=json_data["region"], contact=json_data["contact"])
+            db.session.add(create_user_profile_data)
+            db.session.commit()
+            return jsonify ({"profile_data":create_user_profile_data.serialize()}), 201
+        updated = userProfile.update(**data_decoded)
+        if updated: 
+            return jsonify ({"profile_data":"Usuario Actualizado"}), 204
+        return jsonify ({"profile_data":"Ocurrio un error"}), 500
+            
+
 @api.route("/encontrar-gamers",methods=["POST"])
 @jwt_required()
 def handle_private():
     current_user = get_jwt_identity()
     return jsonify(current_user), 200
-
