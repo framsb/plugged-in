@@ -14,7 +14,6 @@ import { LogIn } from "./pages/login"
 import { EncontrarGamers } from "./pages/encontrar-gamers";
 import { Perfil } from "./pages/perfil"
 
-
 //create your first component
 const Layout = () => {
   //the basename is used when your project is published in a subdirectory and not in the root of the domain

@@ -18,7 +18,15 @@ const getState = ({ getStore, getActions, setStore }) => {
       games: [],
       user: [],
       profile: [],
-      europe: [],
+      region: ["Asia",
+        "África",
+        "Europa",
+        "América del Norte",
+        "América del Sur",
+        "Oceanía"],
+      posts: [],
+      comments: [],
+      profiles: []
     },
     actions: {
       registerUser: async (data) => {
@@ -50,49 +58,34 @@ const getState = ({ getStore, getActions, setStore }) => {
           return true;
         } else return false;
       },
-      
+
       logOutUser: () => {
         localStorage.removeItem("token");
         setStore({ isLoggedIn: false });
       },
-      
-      privateData: async () => {
-        let response = await fetch(`${API_URL}/api/encontrar-gamers`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        });
-        let data = await response.json();
-        // console.log("Esta es mi data privada", data);
-      },
-      
+
       loadRegions: async () => {
         try {
           let response = await fetch(
             "https://restcountries.com/v3.1/subregion/europe"
-            );
-            const data = await response.json();
-            //setStore({ europe: data});
-            console.log(data);
-          } catch (error) {
-            console.log(error);
+          );
+          const data = await response.json();
+          //setStore({ europe: data});
+          console.log(data);
+        } catch (error) {
+          console.log(error);
         }
       },
-      
-      loadGames: async () => {
+
+      loadGamesData: async () => {
         const url =
-        "https://circumvent-cors.herokuapp.com/https://api.igdb.com/v4/games/";
+          "https://api.rawg.io/api/games?key=0929bf6edddc4ca0b6b87155780d1977&tags=7";
         try {
           let response = await fetch(url, {
-            method: "POST",
+            method: "GET",
             headers: {
               "Content-Type": "application/json",
-              "Client-ID": "vv0iej57iqk1yc5vok6jxv5qwewuih",
-              Authorization: "Bearer m62v47lki4it9tj1uku36n7x58fsc0",
             },
-            body: "fields name; where rating > 95;",
           });
           const data = await response.json();
           setStore({ games: data });
@@ -101,7 +94,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           console.log(error);
         }
       },
-      
+
       getUserDetails: async (data) => {
         let response = await fetch(`${API_URL}/api/detalles-usuario`, {
           method: "GET",
@@ -118,13 +111,14 @@ const getState = ({ getStore, getActions, setStore }) => {
           return true;
         } else return console.log("Ocurrio un error", response.status);
       },
-      
+
       handleUserProfile: (prop, data) => {
-        let store = getStore()
-        let user_data = (store.user[`${prop}`] = data)
-        setStore(prev => ({
-          ...prev, user_data
-        }))
+        let store = getStore();
+        let user_data = (store.user[`${prop}`] = data);
+        setStore((prev) => ({
+          ...prev,
+          user_data,
+        }));
       },
 
       updateUserProfile: async (data) => {
@@ -138,17 +132,112 @@ const getState = ({ getStore, getActions, setStore }) => {
         });
         if (response.status == 204 || response.status == 201) {
           // let data = await response.json();
-          alert("Datos Actualizados!")
-          getUserDetails();
+          alert("Datos Actualizados!");
+          getActions().getUserDetails();
           return true;
         } else return console.log("Ocurrio un error", response.status);
       },
-      
+
+      putImage: async (data) => {
+        let response = await fetch(`${API_URL}/api/detalles-usuario/imagen`, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+          body: JSON.stringify(data),
+        });
+        if (response.status == 204 || response.status == 201) {
+          // let data = await response.json();
+          console.log("Foto de perfil Actualizada!");
+          getActions().getUserDetails();
+          return true;
+        } else return console.log("Ocurrio un error", response.status);
+      },
+
+      publishPost: async (data) => {
+        let response = await fetch(`${API_URL}/api/encontrar-gamers`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+          body: JSON.stringify(data),
+        });
+        if (response.ok) {
+          alert("Anuncio Publicado!");
+          getActions().getPosts();
+          return true;
+        } else return console.log("Ocurrio un error", response.status);
+      },
+
+      publishComment: async(data) => {
+        let response = await fetch(`${API_URL}/api/encontrar-gamers/comments`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+          body: JSON.stringify(data),
+        });
+        if (response.ok) {
+          const data = await response.json();
+          alert("Comentario Publicado!");
+          getActions().getComments();
+          return true;
+        } else return console.log("Ocurrio un error", response.status);
+      },
+
+      getPosts: async () => {
+        let response = await fetch(`${API_URL}/api/encontrar-gamers/`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        });
+        if (response.ok) {
+          let data = await response.json();
+          setStore({ posts: data.results });
+          return true;
+        } else return console.log("Ocurrio un error", response.status);
+      },
+
+      getComments: async () => {
+        let response = await fetch(`${API_URL}/api/encontrar-gamers/comments`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        });
+        if (response.ok) {
+          let data = await response.json();
+          setStore({ comments: data.results });
+          return true;
+        } else return console.log("Ocurrio un error", response.status);
+      },
+
+      getProfiles: async (data) => {
+        let response = await fetch(`${API_URL}/api/user-profiles`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        });
+        if (response.ok) {
+          let data = await response.json();
+          setStore({ profiles: data.results });
+          return true;
+        } else return console.log("Ocurrio un error", response.status);
+      },
+
       getMessage: () => {
         // fetching data from the backend
         fetch(process.env.BACKEND_URL + "/api/hello")
-        .then((resp) => resp.json())
-        .then((data) => setStore({ message: data.message }))
+          .then((resp) => resp.json())
+          .then((data) => setStore({ message: data.message }))
           .catch((error) =>
             console.log("Error loading message from backend", error)
           );

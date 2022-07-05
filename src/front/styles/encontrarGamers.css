@@ -19,7 +19,6 @@
 
 .form-group {
     padding: 35px;
-    max-width: 1400px;
 }
 /* divs que agrupan "Publica tu anuncio! */
 
@@ -34,6 +33,7 @@
 
 .cuerpo-textarea {
     background-color: rgb(172, 248, 248);
+    max-width: 600px;
 }
 
 .cuerpo-textarea:focus {
@@ -46,8 +46,10 @@
 
 /* div que agrupa "Anuncios Publicados */
 .anuncios-publicados {
-    padding: 35px;
-
+    padding: 25px;
+    min-width: 600px;
+    height: auto;
+    margin-right: 0;
 }
 
 /* informacion del user en el anuncio */
@@ -77,4 +79,60 @@
     width: 400px;
     border: solid #8276a8;
     border-radius: 5px;
+}
+
+
+.autocomplete-juegos {
+    padding: 10px;
+    margin-bottom: 15px;
+}
+
+.comment-section {
+    list-style: none;
+    padding-left: 0px;
+    border-top: solid rgba(0, 0, 0, 0.39);
+    padding-bottom: 10px;
+}
+
+
+.Container-Input{
+    background: none;
+    padding-right: 150px;
+    position: relative;
+    margin:absolute;
+}
+
+.Container-Input input{
+    border-image-source: linear-gradient(90deg, #020024 0%, #090979 35%, #00d4ff 100%);
+    border-width: 0 0 1px;
+    border-image-slice: 1;
+    width: 300px;
+    padding: 15px 5px;
+}
+
+.Container-Input label{
+    position: absolute;
+    bottom: 0.8rem;
+    left: 11px;
+    color: grey;
+    pointer-events: none;
+    transition: all 0.3s ease;
+}
+.Container-Input input:valid ~ label,
+.Container-Input input:focus ~ label{
+    transform: translateY(-30px);
+    font-size: 10px;
+    background: white;
+}
+
+input:focus{
+    border-image-source: linear-gradient(90deg,#00d4ff 0% , #090979 35% ,#020024 100% );
+    border-width: 0 0 1px;
+    border-image-slice: 1;
+    outline: none;
+}
+
+.comments {
+    border-bottom: solid rgba(128, 128, 128, 0.25);
+    padding-top: 15px;
 }

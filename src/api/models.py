@@ -44,6 +44,7 @@ class Profile(db.Model):
     contact = db.Column(db.String(50), unique=True, nullable=False)
     post_id = db.relationship('Post_user', backref='post', lazy=True)
     friends = db.relationship('Friends', backref='Friends', lazy=True)
+    profile_comments = db.relationship('Comment', backref='profile_comment', lazy=True)
 
     def __repr__(self):
         return f'<Profile {self.id}>'
@@ -76,39 +77,61 @@ class Profile(db.Model):
         except Exception as error:
             db.session.rollback()
             return False
-        
-
     
 class Post_user(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    post_name = db.Column(db.String(150), unique=True, nullable=False)
-    post_description =db.Column(db.String(400), unique=True, nullable=False)
-    posted = db.Column(db.DateTime, nullable=False)
+    post_title = db.Column(db.String(150), unique=True, nullable=False)
+    post_game = db.Column(db.String(150))
+    post_description = db.Column(db.String(400), unique=True, nullable=False)
+    posted = db.Column(db.DateTime, default=datetime.utcnow)
     user_id = db.Column(db.Integer, db.ForeignKey('profile.id'))
+    likes = db.relationship('Like', backref='like', lazy=True)
+    post_comments = db.relationship('Comment', backref='post_comment', lazy=True)
+
+    def serialize(self):
+        profile = Profile.query.get(self.user_id)
+        user = User.query.get(profile.user_id)
+        return {
+            "id": self.id,
+            "posted": self.posted,
+            "username": user.username,
+            "image": profile.image,
+            "user_id": self.user_id,
+            "region": profile.region,
+            "contact": profile.contact,
+            "post_title": self.post_title,
+            "post_game": self.post_game,
+            "post_description": self.post_description,
+        }
+
+class Comment(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    created = db.Column(db.DateTime, default=datetime.utcnow) #fecha de creacion
+    comment_content = db.Column(db.String(400))
+    author_id = db.Column(db.Integer, db.ForeignKey("profile.id"))
+    post_id = db.Column(db.Integer, db.ForeignKey("post_user.id"))
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "author_id": self.author_id,
+            "created": self.created,
+            "comment_content": self.comment_content,
+            "post_id": self.post_id,
+        }
+
+class Like(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    like_number = db.Column(db.Integer)
+    post_id = db.Column(db.Integer, db.ForeignKey("post_user.id")) 
+    
+    def serialize(self):
+        return {
+            "id": self.id,
+        }
 
 class Friends(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_from_id = db.Column(db.Integer, db.ForeignKey("profile.id"))
 
-class Comment(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    author_id = db.Column(db.Integer, db.ForeignKey("profile.id"))
-    created = db.Column(db.DateTime, nullable=False) #fecha de creacion
-    comment_content = db.Column(db.String(400))
-    post_id = db.Column(db.Integer, db.ForeignKey("post_user.id"))
-
-# class Games(db.Model):
-#     id = db.Column(db.Integer, primary_key=True)
-#     name = db.Column(db.String(100), unique=True, nullable=False)
-#     genre = db.Column(db.String(100), unique=False, nullable=False)
-#     game_modes = db.Column(db.String(100), unique=False, nullable=False)
-#     release_dates = db.Column(db.Integer, unique=False)
-        
-#     def __init__(self, id, name, genre, game_modes, release_dates):
-#         self.id = id
-#         self.name = name
-#         self.genre = genre
-#         self.game_modes = game_modes
-#         self.release_dates = release_dates
-    
    
