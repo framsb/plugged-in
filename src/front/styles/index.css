@@ -1,9 +1,18 @@
 .navbar {
-    background-color: #1d2a57;
+    background-color: #101733;
     color: white;
     font-size: 20px;
     text-decoration: none;
     padding: 10px;
+}
+
+.navbar-logo {
+    height: 60px;
+}
+.navbar-logo-titulo {
+    padding-top: 5px;
+    padding-left: 10px;
+    width: 130px;
 }
 .btn-link {
     color: white;

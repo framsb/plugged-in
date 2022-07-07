@@ -9,10 +9,13 @@ import injectContext from "./store/appContext";
 
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
-import { Register } from "./pages/register"
-import { LogIn } from "./pages/login"
+import { Register } from "./pages/register";
+import { LogIn } from "./pages/login";
 import { EncontrarGamers } from "./pages/encontrar-gamers";
-import { Perfil } from "./pages/perfil"
+import { Perfil } from "./pages/perfil";
+import { UnPerfil } from "./pages/unPerfil";
+import { ForgotPassword } from "./pages/forgot-password";
+import { ResetPassword } from "./pages/reset-password";
 
 //create your first component
 const Layout = () => {
@@ -35,11 +38,20 @@ const Layout = () => {
             <Route exact path="/encontrar-gamers">
               <EncontrarGamers />
             </Route>
+            <Route exact path="/detalles-usuario/:id">
+              <UnPerfil />
+            </Route>
             <Route exact path="/iniciar-sesion">
               <LogIn />
             </Route>
             <Route exact path="/tu-perfil">
               <Perfil />
+            </Route>
+            <Route exact path="/recuperar-contraseña">
+              <ForgotPassword />
+            </Route>
+            <Route exact path="/reestablecer-contraseña">
+              <ResetPassword />
             </Route>
             <Route>
               <h1>Not found!</h1>

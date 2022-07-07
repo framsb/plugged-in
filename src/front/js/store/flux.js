@@ -26,7 +26,9 @@ const getState = ({ getStore, getActions, setStore }) => {
         "Oceanía"],
       posts: [],
       comments: [],
-      profiles: []
+      profiles: [],
+      searchusername: [],
+      oneProfile: [],
     },
     actions: {
       registerUser: async (data) => {
@@ -64,18 +66,6 @@ const getState = ({ getStore, getActions, setStore }) => {
         setStore({ isLoggedIn: false });
       },
 
-      loadRegions: async () => {
-        try {
-          let response = await fetch(
-            "https://restcountries.com/v3.1/subregion/europe"
-          );
-          const data = await response.json();
-          //setStore({ europe: data});
-          console.log(data);
-        } catch (error) {
-          console.log(error);
-        }
-      },
 
       loadGamesData: async () => {
         const url =
@@ -89,7 +79,6 @@ const getState = ({ getStore, getActions, setStore }) => {
           });
           const data = await response.json();
           setStore({ games: data });
-          console.log(data);
         } catch (error) {
           console.log(error);
         }
@@ -138,6 +127,22 @@ const getState = ({ getStore, getActions, setStore }) => {
         } else return console.log("Ocurrio un error", response.status);
       },
 
+      updateFavoriteGame: async (data) => {
+        let response = await fetch(`${API_URL}/api/detalles-usuario/juegos-favoritos`, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+          body: JSON.stringify(data),
+        });
+        if (response.status == 204 || response.status == 201) {
+          alert("Datos Actualizados!");
+          getActions().getUserDetails();
+          return true;
+        } else return console.log("Ocurrio un error", response.status);
+      },
+
       putImage: async (data) => {
         let response = await fetch(`${API_URL}/api/detalles-usuario/imagen`, {
           method: "PUT",
@@ -171,6 +176,37 @@ const getState = ({ getStore, getActions, setStore }) => {
         } else return console.log("Ocurrio un error", response.status);
       },
 
+      publishPostGame: async (data) => {
+        let response = await fetch(`${API_URL}/api/encontrar-gamers/juego`, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+          body: JSON.stringify(data),
+        });
+        if (response.status == 204 || response.status == 201) {
+          alert("Juego seleccionado!");
+          return true;
+        } else return console.log("Ocurrio un error", response.status);
+      },
+
+      deletePost: async(data)=> {
+        let response = await fetch(`${API_URL}/api/encontrar-gamers`, {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+          body: JSON.stringify(data),
+        });
+        if (response.ok) {
+          getActions().getUserDetails();
+          alert("Anuncio Eliminado!");
+          return true;
+        } else return console.log("Ocurrio un error", response.status);
+      },
+
       publishComment: async(data) => {
         let response = await fetch(`${API_URL}/api/encontrar-gamers/comments`, {
           method: "POST",
@@ -181,9 +217,9 @@ const getState = ({ getStore, getActions, setStore }) => {
           body: JSON.stringify(data),
         });
         if (response.ok) {
-          const data = await response.json();
           alert("Comentario Publicado!");
           getActions().getComments();
+          getActions().getPosts();
           return true;
         } else return console.log("Ocurrio un error", response.status);
       },
@@ -232,6 +268,21 @@ const getState = ({ getStore, getActions, setStore }) => {
           return true;
         } else return console.log("Ocurrio un error", response.status);
       },
+      // getOneProfile: async (data) => {
+      //   let response = await fetch(`${API_URL}/api/user-profiles/<int:id>`, {
+      //     method: "GET",
+      //     headers: {
+      //       "Content-Type": "application/json",
+      //     },
+      //     body: JSON.stringify(data),
+      //   });
+      //   if (response.ok) {
+      //     let data = await response.json();
+      //     setStore({ oneProfile: data.results });
+      //     return true;
+      //   } else return console.log("Ocurrio un error", response.status);
+      // },
+
 
       getMessage: () => {
         // fetching data from the backend

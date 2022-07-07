@@ -29,11 +29,10 @@ class User(db.Model):
             "username": self.username,
             "email": self.email,
             "birthdate": self.birthdate,
-            "registration_date": self.registration_date
+            "registration_date": self.registration_date,
             # do not serialize the password, its a security breach
         }
     
-
 class Profile(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
@@ -50,6 +49,7 @@ class Profile(db.Model):
         return f'<Profile {self.id}>'
 
     def serialize(self):
+        user = User.query.get(self.user_id)
         return {
             "id": self.id,
             "user_id": self.user_id,
@@ -58,6 +58,10 @@ class Profile(db.Model):
             "favorite_games": self.favorite_games,
             "region": self.region,
             "contact": self.contact,
+            "username": user.username,
+            "birthdate": user.birthdate,
+            "email": user.email,
+            "registration_date": user.registration_date,
             "post_id": list(map(lambda post: post.serialize(), self.post_id)),
             "friends": list(map(lambda post: post.serialize(), self.friends))
             # do not serialize the password, its a security breach
@@ -96,12 +100,14 @@ class Post_user(db.Model):
             "posted": self.posted,
             "username": user.username,
             "image": profile.image,
+            "profile_user_id": profile.user_id,
             "user_id": self.user_id,
             "region": profile.region,
             "contact": profile.contact,
             "post_title": self.post_title,
             "post_game": self.post_game,
             "post_description": self.post_description,
+            "comments": [comment.serialize() for comment in self.post_comments]
         }
 
 class Comment(db.Model):
@@ -112,8 +118,12 @@ class Comment(db.Model):
     post_id = db.Column(db.Integer, db.ForeignKey("post_user.id"))
 
     def serialize(self):
+        profile = Profile.query.get(self.author_id)
+        user = User.query.get(profile.user_id)
         return {
             "id": self.id,
+            "username": user.username,
+            "image": profile.image,
             "author_id": self.author_id,
             "created": self.created,
             "comment_content": self.comment_content,

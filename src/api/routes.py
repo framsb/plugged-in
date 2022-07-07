@@ -87,9 +87,21 @@ def handle_user_details():
         if updated: 
             return jsonify ({"profile_data":"Usuario Actualizado"}), 204
         return jsonify ({"profile_data":"Ocurrio un error"}), 500
+
+@api.route('/detalles-usuario/juegos-favoritos', methods=['PUT'])
+@jwt_required()
+def handle_favorite_games():
+    current_user = get_jwt_identity()
+    data = request.data
+    json_data = request.json
+    userProfile = Profile.query.filter_by(user_id=current_user).one_or_none()
+    userProfile.favorite_games = json_data
+    db.session.commit()
+    return jsonify ({"profile_data":"Juego actualizado a tu perfil"}), 201
+    
             
 
-@api.route("/encontrar-gamers",methods=["POST", "GET"])
+@api.route("/encontrar-gamers",methods=["POST", "GET", "DELETE"])
 @jwt_required()
 def handle_private():
     if request.method == 'POST':
@@ -111,6 +123,18 @@ def handle_private():
         "results": posts_serialize
         }
         return jsonify(response_body), 200
+    if request.method == 'DELETE':
+        current_user = get_jwt_identity()
+        data = request.data
+        data_decoded = json.loads(data)
+        current_profile = Profile.query.filter_by(user_id=current_user).one_or_none()
+        delete_post = Post_user.query.filter_by(id=data_decoded["post_id"]).one_or_none()
+        db.session.delete(delete_post)
+        db.session.commit()
+        response_body = {
+            "message": "Post eliminado"
+        }
+        return jsonify(response_body), 200
 
 @api.route('/user-profiles', methods=['GET'])
 def handle_users():
@@ -119,7 +143,6 @@ def handle_users():
     response_body = {
         "results": profiles_serialize
     }
-
     return jsonify(response_body), 200
 
 @api.route("/encontrar-gamers/comments",methods=["POST", "GET"])
@@ -130,7 +153,6 @@ def handle_comments():
         data = request.data
         data_decoded = json.loads(data)
         current_profile = Profile.query.filter_by(user_id=current_user).one_or_none()
-        # original_post = Post_user.query.get(40)
         original_post = Post_user.query.filter_by(id=data_decoded["post_id"]).one_or_none()
         newComment = Comment(author_id=current_profile.id, post_id=original_post.id, comment_content=data_decoded["comment_content"])
         db.session.add(newComment)
@@ -160,3 +182,4 @@ def handle_image():
         "message": "Foto agregada"
     }
     return jsonify(response_body), 201
+

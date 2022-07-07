@@ -1,9 +1,14 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
+import { Redirect } from "react-router-dom";
+import { Context } from "../store/appContext";
 import { Results } from "./Results";
 
 export const Search = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [gameResults, setGameResults] = useState([]);
+
+  const { store, actions } = useContext(Context);
 
   const handleChange = (e) => {
     setSearchTerm(e.target.value);
@@ -27,24 +32,6 @@ export const Search = () => {
   };
 
   return (
-    <div className="game-search">
-    <form onSubmit={onSubmit}>
-      <div className="dropdown">
-      <button
-          className="btn btn-primary dropdown-toggle"
-          type="button"
-          id="dropdownMenuButton1"
-          data-bs-toggle="dropdown"
-          aria-expanded="false"
-        >
-          <input type="text" className="btn-primary" value={searchTerm} onChange={handleChange} />
-        </button>
-        <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">    
-        <Results gameResults={gameResults} />
-        </ul>
-        <input type="submit" />
-      </div>
-      </form>
-    </div>
+    <></>
   );
 };

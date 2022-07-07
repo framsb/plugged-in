@@ -3,13 +3,14 @@ import { Link, Redirect } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import { Context } from "../store/appContext";
 import "../../styles/login.css";
-import * as React from 'react';
-import Stack from '@mui/material/Stack';
-import Button from '@mui/material/Button';
+import * as React from "react";
+import Stack from "@mui/material/Stack";
+import Button from "@mui/material/Button";
 import fondoLogin from "../../img/Fondo-Login.jpg";
+import { ForgotPassword } from "./forgot-password";
+import ReactTooltip from "react-tooltip";
 
 export const LogIn = () => {
-
   const { actions } = useContext(Context);
   const [login, setLogin] = useState({
     email: "",
@@ -19,7 +20,7 @@ export const LogIn = () => {
   const history = useHistory();
 
   const [showPassword, setShowPassword] = useState(false);
-  
+
   let emailrgx = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
   let passwordregex = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/; //
 
@@ -49,7 +50,7 @@ export const LogIn = () => {
 
   return (
     <>
-    <section className="h-100 h-custom login-container d-flex">
+      <section className="h-100 h-custom login-container d-flex">
         <div className="card p-4">
           <p className="registro-titulo">Inicia Sesión!</p>
           <div className="card-body"></div>
@@ -71,12 +72,24 @@ export const LogIn = () => {
                   }}
                 />
                 <label>Email</label>
+                {errors.email && (
+                  <span
+                    data-tip
+                    data-for="Tooltip1"
+                    className="FloatIcon btn float"
+                  >
+                    <i className="fa-solid fa-delete-left"></i>
+                    <ReactTooltip
+                      id="Tooltip1"
+                      place="top"
+                      textColor="white"
+                      backgroundColor="black"
+                    >
+                      Correo electrónico inválido
+                    </ReactTooltip>
+                  </span>
+                )}
               </div>
-              {errors.email && (
-                <div className="text-secondary">
-                  Correo electrónico inválido
-                </div>
-              )}
 
               <div className="Container-Input mt-5">
                 <div className="input-btn">
@@ -106,16 +119,30 @@ export const LogIn = () => {
                     }}
                   ></button>
                   <label>Contraseña</label>
+                  {errors.password && (
+                    <span
+                      data-tip
+                      data-for="Tooltip1"
+                      className="FloatIcon btn float"
+                    >
+                      <i className="fa-solid fa-delete-left"></i>
+                      <ReactTooltip
+                        id="Tooltip1"
+                        place="top"
+                        textColor="white"
+                        backgroundColor="black"
+                      >
+                        Recuerda que tu contraseña debe tener: 8 caracteres, 1
+                        letra minúscula, 1 letra mayúscula, 1 número y 1
+                        caracter especial.
+                      </ReactTooltip>
+                    </span>
+                  )}
                 </div>
               </div>
-              {errors.password && (
-                <div className="text-secondary">
-                  Recuerda que tu contraseña debe tener: 8 caracteres, 1 letra
-                  minúscula, 1 letra mayúscula, 1 número y 1 caracter especial.
-                </div>
-              )}
             </div>
-            <Button type="button"
+            <Button
+              type="button"
               className="mt-3 mb-1"
               onClick={handleSubmit}
               disabled={
@@ -123,22 +150,29 @@ export const LogIn = () => {
                 errors.password ||
                 !login.email.length > 0 ||
                 !login.password.length > 0
-              }variant="contained"
-              size="large">
-                Iniciar Sesión
-                </Button>
-            <Link to="/registrarse">
+              }
+              variant="contained"
+              size="large"
+            >
+              Iniciar Sesión
+            </Button>
+            <div className="d-flex p-2">
+              <Link to="/registrarse">
                 <div className="redirect-link">
                   No tienes cuenta todavía? Crea una aquí
                 </div>
-            </Link>
+              </Link>
+              <Link to="/recuperar-contraseña">
+                <div className="redirect-link">Olvidaste la contraseña?</div>
+              </Link>
+            </div>
           </form>
         </div>
         <div className="register-photo">
           <img src={fondoLogin} alt="Sample photo" className="img-fluid" />
         </div>
         {localStorage.getItem("token") != undefined && (
-        <Redirect to={"/encontrar-gamers"}></Redirect>
+          <Redirect to={"/encontrar-gamers"}></Redirect>
         )}
       </section>
     </>

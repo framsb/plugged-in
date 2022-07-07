@@ -13,12 +13,13 @@ import Checkbox from "@mui/material/Checkbox";
 import CheckBoxOutlineBlankIcon from "@mui/icons-material/CheckBoxOutlineBlank";
 import CheckBoxIcon from "@mui/icons-material/CheckBox";
 import { Search } from "../component/Search";
+import { PostsProfile } from "../component/postsProfile";
+import { Results } from "../component/Results";
+import AccountCircle from "@mui/icons-material/AccountCircle";
 
 export const Perfil = () => {
   const { store, actions } = useContext(Context);
   const [canEdit, setCanEdit] = useState(false);
-  const [inputValue, setInputValue] = useState([]);
-  const [isSelected, setIsSelected] = useState(false);
   const editar = () => {
     setCanEdit((canEdit) => !canEdit);
   };
@@ -44,14 +45,11 @@ export const Perfil = () => {
       if (response.ok) {
         const data = await response.json();
         actions.putImage(data.secure_url);
-    
       }
     } catch (error) {
       console.log("message", error);
     }
   }
-
-  const history = useHistory();
 
   const datosPerfil = (e) => {
     actions.handleUserProfile(e.target.name, e.target.value);
@@ -63,7 +61,7 @@ export const Perfil = () => {
       favorite_games: store.user.favorite_games,
       region: store.user.region,
       contact: store.user.contact,
-      image: "",
+      image: store.user.image,
     };
     if (actions.updateUserProfile(data)) {
       console.log("Perfecto");
@@ -76,11 +74,39 @@ export const Perfil = () => {
     actions.getUserDetails();
   }, []);
 
+  console.log(store)
+
   const darkTheme = createTheme({
     palette: {
       mode: "dark",
     },
   });
+
+  //search videojuegos API
+  const [searchTerm, setSearchTerm] = useState("");
+  const [gameResults, setGameResults] = useState([]);
+
+  const handleChange = (e) => {
+    e.preventDefault();
+    setSearchTerm(e.target.value);
+  };
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    let slug = searchTerm.split(" ").join("-").toLowerCase();
+
+    setGameResults([]);
+    fetch(
+      `https://api.rawg.io/api/games?key=0929bf6edddc4ca0b6b87155780d1977&search=${slug}`
+    )
+      .then((resp) => resp.json())
+      .then(({ results }) => {
+        results === undefined
+          ? alert("Juego no encontrado, intenta de nuevo")
+          : setGameResults(results);
+      });
+    setSearchTerm("");
+  };
 
   return (
     <>
@@ -96,13 +122,21 @@ export const Perfil = () => {
                     : store.user.image
                 }
               />
-            <div className="btn-foto">
-              <input
-                type="file"
-                onChange={(e) => setUploadImages(e.target.files[0])}
-              />
-              <button onClick={uploadFile}>Uploads Image</button>
-            </div>
+              {!canEdit ? (
+                <></>
+              ) : (
+                <div className="btn-foto d-flex mb-3">
+                  <input
+                    className="form-control input-foto bg-primary text-white"
+                    type="file"
+                    id="formFile"
+                    onChange={(e) => setUploadImages(e.target.files[0])}
+                  ></input>
+                  <Button variant="contained" onClick={uploadFile}>
+                    Subir Foto
+                  </Button>
+                </div>
+              )}
             </div>
 
             <div className="username">{store.user.username}</div>
@@ -111,7 +145,7 @@ export const Perfil = () => {
             <div className="info-extra2">{store.user.birthdate}</div>
           </div>
           <div className="descripcion-usuario col-7 text-center">
-            <div className="titulo-descripcion-username">
+            <div className="titulo-descripcion-username p-2">
               {store.user.username}
             </div>
             <div className="titulo-descripcion">Descripción</div>
@@ -146,29 +180,69 @@ export const Perfil = () => {
                 )}
               </ThemeProvider>
             </div>
-            <div className="titulo-descripcion">Juegos favoritos</div>
-            <ThemeProvider theme={darkTheme}>
-              {/* {!canEdit ? (
-                <div className="text-field">
+            <div className="titulo-descripcion">Juego favorito</div>
+            <div className="text-field">
+
+            {!canEdit ? (
+              <>
+                <ThemeProvider theme={darkTheme}>
                   <TextField
                     disabled
                     name="favorite_games"
                     id="outlined-basic"
-                    label="Tus juegos favoritos..."
+                    label="Tu juego favorito..."
                     value={store.user.favorite_games}
                     InputLabelProps={{ shrink: true }}
                     onChange={datosPerfil}
                     variant="outlined"
                     className="TextField"
                     multiline
-                  />
-                </div>
-              ) : (
-                <div className="text-field">
+                    />
+                </ThemeProvider>
+              </>
+            ) : (
+              <>
+                <ThemeProvider theme={darkTheme}>
+                  <div className="search mb-4">
+                    <form onSubmit={onSubmit}>
+                      <div className="dropdown">
+                        <button
+                          className="btn btn-primary dropdown-toggle"
+                          type="button"
+                          id="dropdownMenuButton1"
+                          data-bs-toggle="dropdown"
+                          aria-expanded="false"
+                          onChange={(e) => {e.preventDefault()}}
+                          bs-auto-close="false"
+                          >
+                          <input
+                            type="text"
+                            className="btn-primary"
+                            value={searchTerm}
+                            onChange={handleChange}
+                            placeholder="Busca tu juego favorito..."
+                          />
+                        </button>
+                        <ul
+                          className="dropdown-menu"
+                          aria-labelledby="dropdownMenuClickableInside"
+                          >
+                          <Results
+                            onClick={datosPerfil}
+                            gameResults={gameResults}
+                          />
+                        </ul>
+                        <input type="submit" placeholder="Buscar..." className="btn btn-primary m-2"/>
+                      </div>
+                    </form>
+                  </div>
                   <TextField
+                    InputProps={{
+                      readOnly: true,
+                    }}
                     name="favorite_games"
                     id="outlined-basic"
-                    label="Tus juegos favoritos..."
+                    label="Tu juegos favorito..."
                     value={store.user.favorite_games}
                     InputLabelProps={{ shrink: true }}
                     onChange={datosPerfil}
@@ -176,52 +250,51 @@ export const Perfil = () => {
                     className="TextField"
                     multiline
                   />
-                  <Search />
-                </div>
-              )} */}
-              <TextField
-                disabled
-                name="favorite_games"
-                id="outlined-basic"
-                label="Tus juegos favoritos..."
-                value={store.user.favorite_games}
-                InputLabelProps={{ shrink: true }}
-                onChange={datosPerfil}
-                variant="outlined"
-                className="TextField"
-                multiline
-              />
-              <Search />
-            </ThemeProvider>
+                </ThemeProvider>
+              </>
+            )}
+            </div>
             <div className="titulo-descripcion">Región</div>
             <div className="text-field">
               <ThemeProvider theme={darkTheme}>
                 {!canEdit ? (
-                  <TextField
-                    disabled
-                    name="region"
-                    id="outlined-basic"
-                    label="Escoge tu región actual"
-                    value={store.user.region}
-                    InputLabelProps={{ shrink: true }}
-                    onChange={datosPerfil}
-                    variant="outlined"
-                    className="TextField"
-                    multiline
-                  />
+                  <>
+                    <TextField
+                      disabled
+                      name="region"
+                      id="outlined-basic"
+                      label="Escoge tu región actual"
+                      value={store.user.region}
+                      InputLabelProps={{ shrink: true }}
+                      onChange={datosPerfil}
+                      variant="outlined"
+                      className="TextField"
+                      multiline
+                    />
+                  </>
                 ) : (
-                  <TextField
-                    name="region"
-                    id="outlined-basic"
-                    label="Escoge tu región actual"
-                    InputLabelProps={{ shrink: true }}
-                    value={store.user.region}
-                    onChange={datosPerfil}
-                    variant="outlined"
-                    className="TextField"
-                    multiline
-                  />
-                  
+                  <div>
+                    <select name="region" className="btn btn-primary mb-4" style={{width:"280px"}}onChange={datosPerfil}>
+                      <option value="seleccion" className="btn btn-light" disabled selected>
+                        Selecciona tu región!
+                      </option>
+                      {store.region &&
+                        store.region.map((oner, i) => {
+                          return <option key={i} value={oner} className="btn btn-light">{oner}</option>;
+                        })}
+                    </select>
+                    <TextField
+                      name="region"
+                      id="outlined-basic"
+                      label="Escoge tu región actual"
+                      InputLabelProps={{ shrink: true }}
+                      value={store.user.region}
+                      onChange={datosPerfil}
+                      variant="outlined"
+                      className="TextField mt-2"
+                      multiline
+                    />
+                  </div>
                 )}
               </ThemeProvider>
             </div>
@@ -280,6 +353,33 @@ export const Perfil = () => {
                 Guardar Información
               </Button>
             )}
+          </div>
+          <div className="tus-posts row overX anuncios-publicados">
+            <label
+              htmlFor="exampleFormControlTextarea6"
+              className="titulo-textarea mb-3"
+            >
+              Tus Posts
+            </label>
+            {store.user.post_id &&
+              store.user.post_id.map((post_id, index) => {
+                return (
+                  <div className="col-10 col-md-8 col-lg-4 mt-3" key={index}>
+                    <PostsProfile
+                      image={post_id.image}
+                      username={post_id.username}
+                      posted={post_id.posted}
+                      post_title={post_id.post_title}
+                      post_game={post_id.post_game}
+                      post_description={post_id.post_description}
+                      region={post_id.region}
+                      contact={post_id.contact}
+                      id={post_id.id}
+                      comments={post_id.comments}
+                    />
+                  </div>
+                );
+              })}
           </div>
           {localStorage.getItem("token") == undefined && (
             <Redirect to={"/iniciar-sesion"}></Redirect>

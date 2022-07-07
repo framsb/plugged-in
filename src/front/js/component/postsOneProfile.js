@@ -1,7 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { Redirect } from "react-router-dom";
 import { Context } from "../store/appContext";
+import DeleteIcon from '@mui/icons-material/Delete';
 import "../../styles/encontrarGamers.css";
 import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
@@ -12,14 +13,13 @@ import Collapse from "@mui/material/Collapse";
 import Avatar from "@mui/material/Avatar";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
-import { blue } from "@mui/material/colors";
+import { blue, red } from "@mui/material/colors";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import AddCommentIcon from "@mui/icons-material/AddComment";
 import PropTypes from "prop-types";
 import { styled } from "@mui/material/styles";
-import SendIcon from "@mui/icons-material/Send";
 
-export const Posts = (props) => {
+export const PostsOneProfile = (props) => {
   const { store, actions } = useContext(Context);
 
   const [comment, setComment] = useState({
@@ -49,22 +49,26 @@ export const Posts = (props) => {
     setExpanded(!expanded);
   };
 
+  useEffect(() => {
+    actions.getComments();
+  }, []);
   //
 
-  const handleSubmit = async () => {
+
+  const handleDelete = async () => {
     let data = {
-      comment_content: comment.content,
-      post_id: comment.post_id,
+      post_id: props.id,
     };
-    if (await actions.publishComment(data)) {
+    if (await actions.deletePost(data)) {
     } else {
       alert("Ocurrio un error");
     }
   };
 
+
   return (
     <>
-      <div className="posts-columnas-2">
+      <div>
         <Card sx={{ maxWidth: 345 }}>
           <CardHeader
             avatar={
@@ -76,7 +80,7 @@ export const Posts = (props) => {
             }
             title={props.username}
             subheader={props.posted}
-          />
+            />
           <CardContent>
             <Typography
               variant="body1"
@@ -116,22 +120,10 @@ export const Posts = (props) => {
               <AddCommentIcon />
               <p>{props.comments.length}</p>
             </ExpandMore>
-            <Link
-              to={`/detalles-usuario/${props.profile_user_id}`}
-              id={props.id}
-            >
-              <Typography
-                variant="body1"
-                className="mb-3 text-right"
-                style={{ fontWeight: "600" }}
-              >
-                Visitar Perfil
-              </Typography>
-            </Link>
           </CardActions>
           <Collapse in={expanded} timeout="auto" unmountOnExit>
             <CardContent>
-              <p className="text-secondary ps-1">Comentarios...</p>
+              <p className="text-secondary">Comentarios...</p>
               <ul className="comment-section">
                 <li>
                   <div className="comments">
@@ -164,32 +156,9 @@ export const Posts = (props) => {
                   </div>
                 </li>
                 <li>
-                  {props.comments.length == 0 && (
-                    <Typography paragraph className="no-comments">
-                      No hay comentarios :C
-                    </Typography>
+                {props.comments.length == 0 && (
+                    <Typography paragraph className="no-comments">No hay comentarios :C</Typography>
                   )}
-                </li>
-                <li>
-                  <div className="send-comments d-flex mt-2">
-                    <div className="Container-Input">
-                      <input
-                        name="content"
-                        className="comments-input"
-                        placeholder="Agregar comentario..."
-                        value={comment.content}
-                        onChange={datosComment}
-                        style={{ width: "245px" }}
-                      ></input>
-                    </div>
-                    <button
-                      type="button"
-                      className="btn btn-secondary btn-sm mt-2"
-                      onClick={handleSubmit}
-                    >
-                      <SendIcon />
-                    </button>
-                  </div>
                 </li>
               </ul>
             </CardContent>
@@ -200,7 +169,7 @@ export const Posts = (props) => {
   );
 };
 
-Posts.propTypes = {
+PostsOneProfile.propTypes = {
   username: PropTypes.string,
   posted: PropTypes.string,
   post_title: PropTypes.string,
@@ -208,6 +177,4 @@ Posts.propTypes = {
   post_description: PropTypes.string,
   region: PropTypes.string,
   contact: PropTypes.string,
-  id: PropTypes.number,
-  user_id: PropTypes.number,
 };

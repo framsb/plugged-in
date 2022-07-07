@@ -39,6 +39,19 @@
     padding-bottom: 15px;
 }
 
+.input-foto {
+    width: 250px;
+    margin: auto;
+}
+
+.search .btn-primary input{
+    width: 300px;
+}
+
+.search input::placeholder{
+    color: white;
+}
+
 .info-extra {
     text-align: center;
     color: rgba(255, 255, 255, 0.466);
@@ -85,5 +98,29 @@
     overflow-y: auto;
 }
 
+.no-comments {
+    text-align: center;
+    color: gray;
+    background-color: rgba(128, 128, 128, 0.199);
+    padding: 5px 0px;
+}
+
+.tus-posts {
+    width: 100%;
+    border-top: solid rgba(255, 255, 255, 0.466);
+}
+
 /* padding-bottom: 15px;
     border-bottom: solid rgba(214, 214, 214, 0.13); */
+
+.delete-icon{
+    border: none;
+    margin-left: auto;
+    background-color: white;
+}
+.delete-icon:hover{
+    border: none;
+    margin-left: auto;
+    background-color: rgb(189, 189, 189);
+    border-radius: 20%;
+}

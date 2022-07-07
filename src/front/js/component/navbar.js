@@ -3,6 +3,8 @@ import { Link, Redirect } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import { Context } from "../store/appContext";
 import "../../styles/index.css";
+import Logo from "../../img/Logo.png";
+import Titulo from "../../img/Logo-titulo.png";
 
 export const Navbar = () => {
   const { store, actions } = useContext(Context);
@@ -13,7 +15,8 @@ export const Navbar = () => {
     <nav className="navbar">
       <div className="container">
         <Link to="/">
-          <span className="navbar navbar-logo mb-0">Plugged-in</span>
+          <img src={Logo} alt="Plugged-In" className="navbar-logo" />
+          <img src={Titulo} alt="Plugged-In" className="navbar-logo-titulo" />
         </Link>
         {localStorage.getItem("token") == undefined ? (
           <>
@@ -24,7 +27,7 @@ export const Navbar = () => {
                 </button>
               </Link>
               <Link to="/iniciar-sesion">
-                <button className="btn btn-link btn-primary login-button">
+                <button className="btn btn-link btn-primary bg-gradient login-button">
                   Iniciar Sesión
                 </button>
               </Link>
@@ -34,12 +37,12 @@ export const Navbar = () => {
           <>
             <div className="ml-auto">
               <Link to="/encontrar-gamers">
-                <button className="btn btn-link btn-primary">
+                <button className="btn btn-link btn-primary bg-gradient">
                   Encontrar Gamers
                 </button>
               </Link>
               <Link to="/tu-perfil">
-                <button className="btn btn-link btn-primary">Tu Perfil</button>
+                <button className="btn btn-link btn-primary bg-gradient">Tu Perfil</button>
               </Link>
               <Link to="/">
                 <button
@@ -47,7 +50,7 @@ export const Navbar = () => {
                     actions.logOutUser();
                     history.push("/iniciar-sesion");
                   }}
-                  className="btn btn-link btn-primary"
+                  className="btn btn-link btn-primary bg-gradient" 
                 >
                   Cerrar Sesión
                 </button>
