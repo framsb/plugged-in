@@ -7,7 +7,7 @@ import * as React from "react";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import fondoLogin from "../../img/Fondo-Login.jpg";
-import { ForgotPassword } from "./forgot-password";
+
 import ReactTooltip from "react-tooltip";
 
 export const LogIn = () => {
@@ -156,16 +156,12 @@ export const LogIn = () => {
             >
               Iniciar Sesión
             </Button>
-            <div className="d-flex p-2">
               <Link to="/registrarse">
                 <div className="redirect-link">
                   No tienes cuenta todavía? Crea una aquí
                 </div>
               </Link>
-              <Link to="/recuperar-contraseña">
-                <div className="redirect-link">Olvidaste la contraseña?</div>
-              </Link>
-            </div>
+
           </form>
         </div>
         <div className="register-photo">

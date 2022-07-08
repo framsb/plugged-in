@@ -104,7 +104,7 @@ export const PostsOneProfile = (props) => {
               {props.region}
             </Typography>
             <Typography variant="subtitle2" className="mt-3">
-              Formas de contacto:
+              Formas de contacto y Plataforma:
             </Typography>
             <Typography variant="body2" color="text.secondary">
               {props.contact}

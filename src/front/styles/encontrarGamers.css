@@ -120,6 +120,16 @@
   --bs-gutter-x: 0;
 }
 
+.titulo-overlay {
+  margin: auto;
+}
+
+.button-perfil {
+  margin-left: auto;
+  margin-right: 0;
+  padding-right: 5px;
+}
+
 .Container-Input {
   background: none;
   padding-right: 0;
@@ -204,24 +214,24 @@ input:focus {
   margin: auto;
 }
 /*Aqui un banner*/
-#banner{
-    background-image: url(https://i.pinimg.com/originals/47/44/d7/4744d7d327e6c8d976574c3745af1dbc.jpg);
-    background-size: cover;
-    background-position: center center;
-    background-repeat: no-repeat;
+#banner {
+  background-image: url(https://i.pinimg.com/originals/47/44/d7/4744d7d327e6c8d976574c3745af1dbc.jpg);
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
 }
 
-.box{
-    width:400px;
-    height:150px;
-    border-radius:5px;
-    margin-right: 30px;
-    margin-left: 30px;
+.box {
+  width: 400px;
+  height: 150px;
+  border-radius: 5px;
+  margin-right: 30px;
+  margin-left: 30px;
 }
 
-.box i{
-    font-size: 30px;
-    text-align: center;
+.box i {
+  font-size: 30px;
+  text-align: center;
 }
 
 /* .posts-columnas-2 {

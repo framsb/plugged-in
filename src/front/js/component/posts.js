@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
-import { Redirect } from "react-router-dom";
 import { Context } from "../store/appContext";
 import "../../styles/encontrarGamers.css";
 import Card from "@mui/material/Card";
@@ -13,7 +12,7 @@ import Avatar from "@mui/material/Avatar";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import { blue } from "@mui/material/colors";
-import FavoriteIcon from "@mui/icons-material/Favorite";
+import Button from '@mui/material/Button';
 import AddCommentIcon from "@mui/icons-material/AddComment";
 import PropTypes from "prop-types";
 import { styled } from "@mui/material/styles";
@@ -100,7 +99,7 @@ export const Posts = (props) => {
               {props.region}
             </Typography>
             <Typography variant="subtitle2" className="mt-3">
-              Formas de contacto:
+              Formas de contacto y Plataforma:
             </Typography>
             <Typography variant="body2" color="text.secondary">
               {props.contact}
@@ -116,18 +115,15 @@ export const Posts = (props) => {
               <AddCommentIcon />
               <p>{props.comments.length}</p>
             </ExpandMore>
+            <div className="button-perfil">
+
             <Link
               to={`/detalles-usuario/${props.profile_user_id}`}
-              id={props.id}
-            >
-              <Typography
-                variant="body1"
-                className="mb-3 text-right"
-                style={{ fontWeight: "600" }}
+              style={{textDecoration: 'none'}}
               >
-                Visitar Perfil
-              </Typography>
+              <Button variant="text">Visitar Perfil</Button>
             </Link>
+              </div>
           </CardActions>
           <Collapse in={expanded} timeout="auto" unmountOnExit>
             <CardContent>

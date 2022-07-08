@@ -14,8 +14,6 @@ import { LogIn } from "./pages/login";
 import { EncontrarGamers } from "./pages/encontrar-gamers";
 import { Perfil } from "./pages/perfil";
 import { UnPerfil } from "./pages/unPerfil";
-import { ForgotPassword } from "./pages/forgot-password";
-import { ResetPassword } from "./pages/reset-password";
 
 //create your first component
 const Layout = () => {
@@ -47,14 +45,8 @@ const Layout = () => {
             <Route exact path="/tu-perfil">
               <Perfil />
             </Route>
-            <Route exact path="/recuperar-contraseña">
-              <ForgotPassword />
-            </Route>
-            <Route exact path="/reestablecer-contraseña">
-              <ResetPassword />
-            </Route>
             <Route>
-              <h1>Not found!</h1>
+              <h1 className="text-light">Not found!</h1>
             </Route>
           </Switch>
         </ScrollToTop>

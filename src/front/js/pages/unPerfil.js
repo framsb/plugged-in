@@ -53,6 +53,7 @@ export const UnPerfil = (props) => {
                 <div className="titulo-descripcion-username p-2">
                   {userProfile.username}
                 </div>
+                  <div className="text-secondary">Se unió el: {userProfile.registration_date}</div>
                 <div className="titulo-descripcion">Descripción</div>
 
                 <div className="text-field">
@@ -102,14 +103,14 @@ export const UnPerfil = (props) => {
                     />
                   </ThemeProvider>
                 </div>
-                <div className="titulo-descripcion">Formas de Contacto</div>
+                <div className="titulo-descripcion">Formas de Contacto y Plataforma</div>
                 <div className="text-field">
                   <ThemeProvider theme={darkTheme}>
                     <TextField
                       disabled
                       name="contact"
                       id="outlined-basic"
-                      label="Formas de Contacto"
+                      label="Formas de Contacto y Plataforma"
                       InputLabelProps={{ shrink: true }}
                       value={userProfile.contact}
                       variant="outlined"

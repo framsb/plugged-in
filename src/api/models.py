@@ -38,11 +38,10 @@ class Profile(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
     about_me = db.Column(db.String(250), unique=True, nullable=False)
     image = db.Column(db.String(240), nullable=True)
-    favorite_games = db.Column(db.String(50), unique=True, nullable=False)
-    region = db.Column(db.String(50), unique=True, nullable=False)
+    favorite_games = db.Column(db.String(50), unique=False, nullable=False)
+    region = db.Column(db.String(50), unique=False, nullable=False)
     contact = db.Column(db.String(50), unique=True, nullable=False)
     post_id = db.relationship('Post_user', backref='post', lazy=True)
-    friends = db.relationship('Friends', backref='Friends', lazy=True)
     profile_comments = db.relationship('Comment', backref='profile_comment', lazy=True)
 
     def __repr__(self):
@@ -63,7 +62,6 @@ class Profile(db.Model):
             "email": user.email,
             "registration_date": user.registration_date,
             "post_id": list(map(lambda post: post.serialize(), self.post_id)),
-            "friends": list(map(lambda post: post.serialize(), self.friends))
             # do not serialize the password, its a security breach
         }
     
@@ -89,7 +87,6 @@ class Post_user(db.Model):
     post_description = db.Column(db.String(400), unique=True, nullable=False)
     posted = db.Column(db.DateTime, default=datetime.utcnow)
     user_id = db.Column(db.Integer, db.ForeignKey('profile.id'))
-    likes = db.relationship('Like', backref='like', lazy=True)
     post_comments = db.relationship('Comment', backref='post_comment', lazy=True)
 
     def serialize(self):
@@ -129,19 +126,4 @@ class Comment(db.Model):
             "comment_content": self.comment_content,
             "post_id": self.post_id,
         }
-
-class Like(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    like_number = db.Column(db.Integer)
-    post_id = db.Column(db.Integer, db.ForeignKey("post_user.id")) 
-    
-    def serialize(self):
-        return {
-            "id": self.id,
-        }
-
-class Friends(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    user_from_id = db.Column(db.Integer, db.ForeignKey("profile.id"))
-
    

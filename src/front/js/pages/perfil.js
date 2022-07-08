@@ -74,8 +74,6 @@ export const Perfil = () => {
     actions.getUserDetails();
   }, []);
 
-  console.log(store)
-
   const darkTheme = createTheme({
     palette: {
       mode: "dark",
@@ -242,7 +240,7 @@ export const Perfil = () => {
                     }}
                     name="favorite_games"
                     id="outlined-basic"
-                    label="Tu juegos favorito..."
+                    label="Tu juego favorito..."
                     value={store.user.favorite_games}
                     InputLabelProps={{ shrink: true }}
                     onChange={datosPerfil}
@@ -298,7 +296,7 @@ export const Perfil = () => {
                 )}
               </ThemeProvider>
             </div>
-            <div className="titulo-descripcion">Formas de Contacto</div>
+            <div className="titulo-descripcion">Formas de Contacto y Plataforma</div>
             <div className="text-field">
               <ThemeProvider theme={darkTheme}>
                 {!canEdit ? (
@@ -306,7 +304,7 @@ export const Perfil = () => {
                     disabled
                     name="contact"
                     id="outlined-basic"
-                    label="Añade tus formas de contacto (eg. Discord, Instagram, Xbox Live, PSN)"
+                    label="Añade tus formas de contacto (eg. Discord, Instagram, Xbox Live, PSN) y Plataforma"
                     InputLabelProps={{ shrink: true }}
                     value={store.user.contact}
                     onChange={datosPerfil}
