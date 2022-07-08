@@ -7,7 +7,8 @@
 }
 
 .navbar-logo {
-    height: 60px;
+    width: 200px;
+    height: auto;
 }
 .navbar-logo-titulo {
     padding-top: 5px;

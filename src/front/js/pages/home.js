@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import "../../styles/home.css";
 import { SelectGames } from "../component/selectGames";
 import FotoAlfonso from "../../img/Foto-alfonso.jpg";
+import FotoFram from "../../img/Foto-fram.jpeg";
 
 export const Home = () => {
   const { store, actions } = useContext(Context);
@@ -148,17 +149,14 @@ export const Home = () => {
         <div className="sn-persona2 col-md-8 offset-md-2">
           <img
             className="sn-img2"
-            src="https://wtwp.com/wp-content/uploads/2015/06/placeholder-image.png"
+            src={FotoFram}
           />
           <div className="sn-texto2">Framberling Barrios</div>
-          <div className="sn-cuerpo2">
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum."
+          <div className="sn-cuerpo2 justify-content-center">
+            Mi nombre es Framberling, actualmente soy estudiante de 9no semestre 
+            de ingenieria en informatica. Soy apasianada por mi carrera y me encanta 
+            aprender cada dia de ella. Hoy, me siento orgullosa de cada
+            pasito que he dado y  contenta de haber iniciado en 4geeks. 
           </div>
         </div>
       </div>

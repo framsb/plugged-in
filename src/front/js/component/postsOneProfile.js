@@ -14,10 +14,11 @@ import Avatar from "@mui/material/Avatar";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import { blue, red } from "@mui/material/colors";
-import FavoriteIcon from "@mui/icons-material/Favorite";
 import AddCommentIcon from "@mui/icons-material/AddComment";
 import PropTypes from "prop-types";
 import { styled } from "@mui/material/styles";
+import { injectStyle } from "react-toastify/dist/inject-style";
+import { ToastContainer, toast } from "react-toastify";
 
 export const PostsOneProfile = (props) => {
   const { store, actions } = useContext(Context);
@@ -52,18 +53,6 @@ export const PostsOneProfile = (props) => {
   useEffect(() => {
     actions.getComments();
   }, []);
-  //
-
-
-  const handleDelete = async () => {
-    let data = {
-      post_id: props.id,
-    };
-    if (await actions.deletePost(data)) {
-    } else {
-      alert("Ocurrio un error");
-    }
-  };
 
 
   return (

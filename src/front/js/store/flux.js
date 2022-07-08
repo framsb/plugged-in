@@ -121,7 +121,6 @@ const getState = ({ getStore, getActions, setStore }) => {
         });
         if (response.status == 204 || response.status == 201) {
           // let data = await response.json();
-          alert("Datos Actualizados!");
           getActions().getUserDetails();
           return true;
         } else return console.log("Ocurrio un error", response.status);
@@ -137,7 +136,6 @@ const getState = ({ getStore, getActions, setStore }) => {
           body: JSON.stringify(data),
         });
         if (response.status == 204 || response.status == 201) {
-          alert("Datos Actualizados!");
           getActions().getUserDetails();
           return true;
         } else return console.log("Ocurrio un error", response.status);
@@ -170,23 +168,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           body: JSON.stringify(data),
         });
         if (response.ok) {
-          alert("Anuncio Publicado!");
           getActions().getPosts();
-          return true;
-        } else return console.log("Ocurrio un error", response.status);
-      },
-
-      publishPostGame: async (data) => {
-        let response = await fetch(`${API_URL}/api/encontrar-gamers/juego`, {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-          body: JSON.stringify(data),
-        });
-        if (response.status == 204 || response.status == 201) {
-          alert("Juego seleccionado!");
           return true;
         } else return console.log("Ocurrio un error", response.status);
       },
@@ -202,7 +184,6 @@ const getState = ({ getStore, getActions, setStore }) => {
         });
         if (response.ok) {
           getActions().getUserDetails();
-          alert("Anuncio Eliminado!");
           return true;
         } else return console.log("Ocurrio un error", response.status);
       },
@@ -217,7 +198,6 @@ const getState = ({ getStore, getActions, setStore }) => {
           body: JSON.stringify(data),
         });
         if (response.ok) {
-          alert("Comentario Publicado!");
           getActions().getComments();
           getActions().getPosts();
           return true;

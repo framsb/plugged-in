@@ -42,7 +42,7 @@ export const LogIn = () => {
       password: login.password,
     };
     if (await actions.loginUser(data)) {
-      history.push("/encontrar-gamers");
+      history.push("/tu-perfil");
     } else {
       alert("Invalid Credentials");
     }

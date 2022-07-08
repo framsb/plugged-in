@@ -17,6 +17,9 @@ import AddCommentIcon from "@mui/icons-material/AddComment";
 import PropTypes from "prop-types";
 import { styled } from "@mui/material/styles";
 import SendIcon from "@mui/icons-material/Send";
+import { injectStyle } from "react-toastify/dist/inject-style";
+import { ToastContainer, toast } from "react-toastify";
+
 
 export const Posts = (props) => {
   const { store, actions } = useContext(Context);
@@ -48,7 +51,13 @@ export const Posts = (props) => {
     setExpanded(!expanded);
   };
 
-  //
+  if (typeof window !== "undefined") {
+    injectStyle();
+  }
+
+  const CustomAlertsComment = () => {
+    toast.dark("Comentario publicado! 💬👾");
+  }
 
   const handleSubmit = async () => {
     let data = {
@@ -56,6 +65,7 @@ export const Posts = (props) => {
       post_id: comment.post_id,
     };
     if (await actions.publishComment(data)) {
+      CustomAlertsComment();
     } else {
       alert("Ocurrio un error");
     }
@@ -192,6 +202,7 @@ export const Posts = (props) => {
           </Collapse>
         </Card>
       </div>
+      <ToastContainer />
     </>
   );
 };

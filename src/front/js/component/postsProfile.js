@@ -18,6 +18,8 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import AddCommentIcon from "@mui/icons-material/AddComment";
 import PropTypes from "prop-types";
 import { styled } from "@mui/material/styles";
+import { injectStyle } from "react-toastify/dist/inject-style";
+import { ToastContainer, toast } from "react-toastify";
 
 export const PostsProfile = (props) => {
   const { store, actions } = useContext(Context);
@@ -53,19 +55,24 @@ export const PostsProfile = (props) => {
     actions.getComments();
   }, [store.user.post_id]);
   //
+  if (typeof window !== "undefined") {
+    injectStyle();
+  }
 
+  const CustomAlertsDeletePost = () => {
+    toast.dark("Post eliminado... :C");
+  }
 
   const handleDelete = async () => {
     let data = {
       post_id: props.id,
     };
     if (await actions.deletePost(data)) {
-      // actions.getPosts();
+      CustomAlertsDeletePost();
     } else {
       alert("Ocurrio un error");
     }
   };
-
 
   return (
     <>
@@ -169,6 +176,7 @@ export const PostsProfile = (props) => {
           </Collapse>
         </Card>
       </div>
+      <ToastContainer />
     </>
   );
 };

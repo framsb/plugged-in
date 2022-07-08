@@ -10,13 +10,14 @@ import Button from "@mui/material/Button";
 import CheckBoxOutlineBlankIcon from "@mui/icons-material/CheckBoxOutlineBlank";
 import CheckBoxIcon from "@mui/icons-material/CheckBox";
 import { Searchgamers } from "../component/searchgamers";
+import { injectStyle } from "react-toastify/dist/inject-style";
+import { ToastContainer, toast } from "react-toastify";
 
 const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
 const checkedIcon = <CheckBoxIcon fontSize="small" />;
 
 export const EncontrarGamers = (props) => {
   const { store, actions } = useContext(Context);
-  const history = useHistory();
 
   const [post, setPost] = useState({
     titulo: "",
@@ -31,14 +32,20 @@ export const EncontrarGamers = (props) => {
     });
   };
 
-  const [inputValue, setInputValue] = useState("");
-
   // funciones de material-ui
   const darkTheme = createTheme({
     palette: {
       mode: "dark",
     },
   });
+
+  if (typeof window !== "undefined") {
+    injectStyle();
+  }
+
+  const CustomAlertsPost = () => {
+    toast.dark("Anuncio publicado! 🎮🕹️😄");
+  }
 
   const handleSubmit = async () => {
     let data = {
@@ -47,10 +54,13 @@ export const EncontrarGamers = (props) => {
       post_game: post.juego,
     };
     if (await actions.publishPost(data)) {
+      CustomAlertsPost();
     } else {
       alert("Ocurrio un error");
     }
   };
+
+  
 
   useEffect(() => {
     actions.getPosts();
@@ -59,11 +69,6 @@ export const EncontrarGamers = (props) => {
   }, []);
 
   //search videojuegos API
-
-  const handleRandomUser = () => {
-    Math.floor(Math.random() * store.user.length);
-  };
-
   return (
     <div className="encontrar-gamers">
       <div className="titulo-principal">
@@ -96,11 +101,11 @@ export const EncontrarGamers = (props) => {
               role="tab"
               aria-controls="pills-home"
               aria-selected="true"
-              className="btn btn-dark box px-4 py-5"
+              className="btn btn-dark box px-4 py-5 btnmove"
               data-aos="zoom-out"
             >
               <i className="text-center fa-solid fa-pen-to-square"></i>
-              <h3>Publica un post</h3>
+              <h3 className="styletext">Publica un post</h3>
             </button>
           </li>
           <li className="nav-item" role="presentation">
@@ -112,10 +117,11 @@ export const EncontrarGamers = (props) => {
               role="tab"
               aria-controls="pills-profile"
               aria-selected="false"
-              className="btn btn-dark box px-4 py-5"
+              className="btn btn-dark box px-4 py-5 btnmove"
+              data-aos="zoom-out"
             >
-              <i className="text-center fa-solid fa-magnifying-glass" data-aos="zoom-out"></i>
-              <h3>Busca gamers</h3>
+              <i className="text-center fa-solid fa-magnifying-glass"></i>
+              <h3 className="styletext">Busca gamers</h3>
             </button>
           </li>
         </ul>
@@ -217,6 +223,8 @@ export const EncontrarGamers = (props) => {
                   return (
                     <div
                       className="col-12 col-md-10 col-lg-4 m-5 posts-columnas"
+                      data-aos="fade-up"
+                      data-aos-duration="3000"
                       key={index}
                     >
                       <Posts
@@ -250,6 +258,7 @@ export const EncontrarGamers = (props) => {
       {localStorage.getItem("token") == undefined && (
         <Redirect to={"/iniciar-sesion"}></Redirect>
       )}
+      <ToastContainer />
     </div>
   );
 };

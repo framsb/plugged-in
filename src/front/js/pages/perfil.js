@@ -16,6 +16,9 @@ import { Search } from "../component/Search";
 import { PostsProfile } from "../component/postsProfile";
 import { Results } from "../component/Results";
 import AccountCircle from "@mui/icons-material/AccountCircle";
+import { injectStyle } from "react-toastify/dist/inject-style";
+import { ToastContainer, toast } from "react-toastify";
+
 
 export const Perfil = () => {
   const { store, actions } = useContext(Context);
@@ -55,6 +58,14 @@ export const Perfil = () => {
     actions.handleUserProfile(e.target.name, e.target.value);
   };
 
+  if (typeof window !== "undefined") {
+    injectStyle();
+  }
+
+  const CustomAlertsUser = () => {
+    toast.dark("Datos actualizados! 😄");
+  }
+
   const handleUpdate = async () => {
     let data = {
       about_me: store.user.about_me,
@@ -64,7 +75,7 @@ export const Perfil = () => {
       image: store.user.image,
     };
     if (actions.updateUserProfile(data)) {
-      console.log("Perfecto");
+      CustomAlertsUser();
     } else {
       alert("Ocurrio un error");
     }
@@ -384,6 +395,7 @@ export const Perfil = () => {
           )}
         </div>
       </div>
+      <ToastContainer />
     </>
   );
 };

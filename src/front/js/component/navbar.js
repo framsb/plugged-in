@@ -4,7 +4,6 @@ import { useHistory } from "react-router-dom";
 import { Context } from "../store/appContext";
 import "../../styles/index.css";
 import Logo from "../../img/Logo.png";
-import Titulo from "../../img/Logo-titulo.png";
 
 export const Navbar = () => {
   const { store, actions } = useContext(Context);
@@ -16,7 +15,6 @@ export const Navbar = () => {
       <div className="container">
         <Link to="/">
           <img src={Logo} alt="Plugged-In" className="navbar-logo" />
-          <img src={Titulo} alt="Plugged-In" className="navbar-logo-titulo" />
         </Link>
         {localStorage.getItem("token") == undefined ? (
           <>

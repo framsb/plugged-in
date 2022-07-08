@@ -51,7 +51,7 @@ export const Register = () => {
       birthdate: register.birthdate,
     };
     if (await actions.registerUser(data)) {
-      history.push("/encontrar-gamers");
+      history.push("/tu-perfil");
     } else {
       alert("El usuario ya existe, intente de nuevo");
     }
@@ -207,7 +207,7 @@ export const Register = () => {
                     }}
                   ></button>
                   <label>Repetir Contraseña</label>
-                </div>
+                
                 {errors.confirmPassword && (
                   <span data-tip data-for="Tooltip4" className="FloatIcon btn">
                     <i className="fa-solid fa-delete-left"></i>
@@ -221,6 +221,7 @@ export const Register = () => {
                     </ReactTooltip>{" "}
                   </span>
                 )}
+                </div>
               </div>
 
               <div className="col-md-9 mb-2">
