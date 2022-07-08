@@ -1,7 +1,126 @@
-/*
-    home.css: This website contains selectors only used in home.css
+body {
+    background-color: #151E3D;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 500;
+    background-image: url('https://static.vecteezy.com/system/resources/previews/001/736/138/non_2x/abstract-dark-blue-blurred-background-with-smoke-vector.jpg');
+    background-size: 200%;
+}
 
-    All pages share the styles on index.css but you should create 
-    one more css for each page that will contain the selected used 
-    on that page only (the ones not reused in other pages).
-*/
+.home {
+    display: flex;
+    margin: 15px;
+    padding-bottom: 50px;
+    border-bottom: solid #8276a8;
+}
+.carousel {
+    min-width: 48%;
+    min-height: 700px;
+    border: solid #0f0a1f;
+    border-radius: 15px;
+}
+.carousel-inner img {
+    width: 900px;
+    height: 700px;
+    object-fit: cover;
+    justify-content: center;
+    border-radius: 15px;
+}
+
+.carousel-caption {
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: 10px;
+    color: aqua;
+}
+
+/* lado derecho del div home */
+.registro-home {
+    min-width: 50%;
+    color: white;
+    border: solid #0f0a1f;
+    border-radius: 15px;
+    margin: 0px 15px;
+    font-size: 30px;
+}
+.register-links {
+    margin-top: 130px;
+}
+.register-now {
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 15px;
+    margin-bottom: 100px;
+}
+.btn-registro {
+    height: 50px;
+    width: 115px;
+    font-size: 25px;
+    border-radius: 20px;
+}
+/* lado derecho del div home */
+
+.sobre-nosotros {
+    color: white;
+    margin: 15px;
+}
+/* titulo Sobre Nosotros... */
+.sn-titulo {
+    text-align: center;
+    font-size: 35px;
+    background-color: #0f0a1f;
+    border-radius: 15px;
+    color: aqua;
+}
+/* clases con sn al principio: sobre nosotros abreviado */
+.sn-persona1 {
+    display: flex;
+    padding: 30px 0px;
+    max-width: 1600px;
+}
+.sn-persona2 {
+    max-width: 1600px;
+    padding: 30px 0px;
+}
+/* img Alfonso */
+.sn-img1 {
+    width: 300px;
+    height: 200px;
+    border: solid #0f0a1f;
+    border-radius: 15px;
+    justify-content: left;
+}
+/* img Framberling */
+.sn-img2 {
+    max-width: 300px;
+    height: 200px;
+    border: solid #0f0a1f;
+    border-radius: 15px;
+    float: right;
+}
+/* texto Alfonso */
+.sn-texto1 {
+    font-size: 20px;
+    padding: 30px;
+    margin-top: 50px;
+    min-width: 220px;
+    font-weight: 600;
+    color: aqua;
+}
+/* texto Framberling */
+.sn-texto2 {
+    font-size: 20px;
+    padding: 30px 30px 50px 30px;
+    margin-top: 50px;
+    float: right;
+    font-weight: 600;
+    color: aqua;
+}
+/* descripciones sobre nosotros */
+.sn-cuerpo1 {
+    max-width: 800px;
+    margin-top: 30px;
+}
+
+.sn-cuerpo2 {
+    max-width: 800px;
+    margin-top: 30px;
+}
